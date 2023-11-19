@@ -2,27 +2,38 @@
 <html>
     <head>
         <style>
+        #chaptertablesection{
+            width: 100%;
+        }
+        
         #subjecthead{
             text-align: center;
-            font-size: 40px;
-            font-weight:800;        
-            padding-top: 50px;
-            padding-bottom: 50px;
+            width: 313px;
+            height: 62px;
+            font-size: 64px;
+            font-weight:400px;        
+            margin-top: 220px;
+            margin-left: 95px;
         }
 
         a{text-decoration: none;}
 
-        .chaptable{
-            width: 100%;
+        .chapterable{
+            text-align: center;
+        }
+        .years{
             font-family: Georgia, 'Times New Roman', Times, serif;
-            font-size: 35px;
-            height: fit-content;
-            margin: auto;
+            font-size: 48px;
+            width: 164px;
+            height: 62px;
+            margin-top: 133 px;
+            margin-left: 186 px;
         }
 
-        .chapdata{
+        .chaptertablecell{
             text-align: center;
-            font-size: 20px;
+            font-size: 40px;
+            font-weight: 100;
             width: 33%;
         }
 
@@ -32,12 +43,19 @@
             color: darkmagenta;
         }
 
-        #concepttable{
+        #concepttablesection{
+            width: 100%;
             font-size: 20px;
             background-color:bisque; 
             margin: auto;
             padding-left: 50px;
         }
+        #conceptvideosection{
+            display :none; 
+            text-align: center;
+        }
+        
+        
         </style>
         <script type = "text/javascript">
 
@@ -66,13 +84,13 @@
             Promise.all([freshman,sophomore,junior]).then((chapterset) => {
                 let table = [];
                 table.push("<tr><th id=\"subjecthead\">"+subject+"</th></tr>")
-                table.push("<tr><th>高一</th><th>高二</th><th>高三</th></tr>")
+                table.push("<tr><th class =\"years\">高一</th><th class =\"years\">高二</th><th class =\"years\">高三</th></tr>")
                 let index = 0;
                 let l1 = chapterset[0].length, l2 = chapterset[1].length, l3 = chapterset[2].length;
-                let prefix = "<td class=\"chapdata\"><h3><a href =\"javascript:void(0)\" onclick=\"javascript:conceptlist('"
+                let prefix = "<td class=\"chaptertablecell\"><h3><a href =\"javascript:void(0)\" onclick=\"javascript:conceptlist('"
                 let middle = "');return false;\">"
                 let suffix = "</a></h3></td>"
-                let dummy = "<td class=\"chapdata\"></td>"
+                let dummy = "<td class=\"chaptertablecell\"></td>"
                 while (index < l1 || index < l2 || index < l3) {
                     table.push("<tr>")
                     if (index < l1) {
@@ -93,8 +111,8 @@
                     table.push("</tr>")
                     index+=1;
                 }
-                table = "<table class=\"chaptable\">" +table.join("") +"</table>"
-                document.getElementById("chaptertable").innerHTML = table
+                table = "<table class=\"chapterable\">" +table.join("") +"</table>"
+                document.getElementById("chaptertablesection").innerHTML = table
             });
             
         }
@@ -123,7 +141,7 @@
                     let concept = rows[i].slice(1,-1)
                     list.push("<h3><a href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + concept + "');return false;\">"+ concept+"</a></h3>")
                 }
-                document.getElementById("concepttable").innerHTML = list.join("")
+                document.getElementById("concepttablesection").innerHTML = list.join("")
             })
         }
 
@@ -146,7 +164,7 @@
                 let concept_video_url = []
                 concept_video_url = data.split(/\r?\n|\r/)
                 enbeded_id = getId(concept_video_url[0])
-                document.getElementById("conceptvideo").style.display = "block"; 
+                document.getElementById("conceptvideosection").style.display = "block"; 
                 document.getElementById("video").src = "https://www.youtube.com/embed/" + enbeded_id + ""
                 document.getElementById("videohead").innerText = conceptname;
             })
@@ -157,11 +175,11 @@
         </script> 
     </head>
     <body>
-        <div id="chaptertable" style="width: 100%;"></div>
-        <div id = "concepttable" style="width: 100%;"></div>
-        <div id="conceptvideo" style="display :none; text-align: center;">
-        <h2 id="videohead" ></h2>
-        <iframe id = "video"  width="560" height="315" src=""></iframe>        
+        <div id="chaptertablesection"></div>
+        <div id = "concepttablesection"></div>
+        <div id="conceptvideosection">
+            <h2 id="videohead" ></h2>
+            <iframe id = "video"  width="560" height="315" src=""></iframe>        
         </div>
     </body>
 </html>
