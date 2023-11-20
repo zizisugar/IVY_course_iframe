@@ -4,6 +4,12 @@
         <style>
         #chaptertablesection{
             width: 100%;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        #chaptercontentsection{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            width: 100%;
+            display: none;
         }
         
         #subjecthead{
@@ -11,47 +17,61 @@
             width: 313px;
             height: 62px;
             font-size: 64px;
-            font-weight:400px;        
-            margin-top: 220px;
-            margin-left: 95px;
+            font-weight:900;
+            margin-left: 8%;
+            margin-bottom: 80px;
+
         }
 
         a{text-decoration: none;}
 
         .chapterable{
             text-align: center;
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+
         }
         .years{
-            font-family: Georgia, 'Times New Roman', Times, serif;
             font-size: 48px;
-            width: 164px;
+            width: 33%;
             height: 62px;
-            margin-top: 133 px;
-            margin-left: 186 px;
+            font-weight: 600;
+            padding-bottom: 50px;
         }
 
         .chaptertablecell{
             text-align: center;
             font-size: 40px;
-            font-weight: 100;
+            font-weight: 400;
             width: 33%;
+            
         }
 
         #conceptlisthead{
-            font-size: 35px;
-            font-weight: bolder;
-            color: darkmagenta;
+  
+            font-size: 48px;
+            margin-left: 7% ;
+            font-weight: 600;
+            margin-bottom: 20px;
+            
+        }
+        .conceptlist{
+            margin: 0%;
+            font-size: 32px;
+            font-weight: 400;
+
+            
         }
 
         #concepttablesection{
             width: 100%;
-            font-size: 20px;
-            background-color:bisque; 
-            margin: auto;
-            padding-left: 50px;
+            background-color:#96d7ca;
+            padding-left: 5%;
+    
+            
         }
         #conceptvideosection{
-            display :none; 
             text-align: center;
         }
         
@@ -61,7 +81,7 @@
 
         /* use gviz to request the data from google spreadsheet  */
 
-        const url_base = 'https://docs.google.com/spreadsheets/d/1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM/gviz/tq?tqx=out:csv&tq=SELECT '
+        const url_base = 'https://docs.google.com/spreadsheets/d/1EsiS7h3QJNDn0hIvGr6pKy-7yS5EIkmlf-OfZhaqCFg/gviz/tq?tqx=out:csv&tq=SELECT '
         const subject = '物理'
 
         function tablecreate(){
@@ -83,13 +103,12 @@
 
             Promise.all([freshman,sophomore,junior]).then((chapterset) => {
                 let table = [];
-                table.push("<tr><th id=\"subjecthead\">"+subject+"</th></tr>")
                 table.push("<tr><th class =\"years\">高一</th><th class =\"years\">高二</th><th class =\"years\">高三</th></tr>")
                 let index = 0;
                 let l1 = chapterset[0].length, l2 = chapterset[1].length, l3 = chapterset[2].length;
-                let prefix = "<td class=\"chaptertablecell\"><h3><a href =\"javascript:void(0)\" onclick=\"javascript:conceptlist('"
+                let prefix = "<td class=\"chaptertablecell\"><a href =\"javascript:void(0)\" onclick=\"javascript:conceptlist('"
                 let middle = "');return false;\">"
-                let suffix = "</a></h3></td>"
+                let suffix = "</a></td>"
                 let dummy = "<td class=\"chaptertablecell\"></td>"
                 while (index < l1 || index < l2 || index < l3) {
                     table.push("<tr>")
@@ -111,7 +130,7 @@
                     table.push("</tr>")
                     index+=1;
                 }
-                table = "<table class=\"chapterable\">" +table.join("") +"</table>"
+                table = "<p id=\"subjecthead\">"+subject+"</p><table class=\"chapterable\">" +table.join("") +"</table>"
                 document.getElementById("chaptertablesection").innerHTML = table
             });
             
@@ -135,12 +154,16 @@
             fetch(url).then((response) => response.text()).then((data) => {
                 let rows = [];
                 let list = [];
+                let firstconcept_chapter;
                 rows = data.split(/\r?\n|\r/)
-                list.push("<p id = \"conceptlisthead\">章節名稱:"+chaptername+"</p>")
+                firstconcept_chapter = rows[0].slice(1,-1)
                 for (var i = 0; i < rows.length;i++) {
                     let concept = rows[i].slice(1,-1)
-                    list.push("<h3><a href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + concept + "');return false;\">"+ concept+"</a></h3>")
+                    list.push("<p class = \"conceptlist\"><a href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + concept + "');return false;\">"+ concept + "</a></p>")
                 }
+                document.getElementById("conceptlisthead").innerText = "章節名稱：" + chaptername
+                changeconcept(firstconcept_chapter)
+                document.getElementById("chaptercontentsection").style.display = "block";
                 document.getElementById("concepttablesection").innerHTML = list.join("")
             })
         }
@@ -164,7 +187,6 @@
                 let concept_video_url = []
                 concept_video_url = data.split(/\r?\n|\r/)
                 enbeded_id = getId(concept_video_url[0])
-                document.getElementById("conceptvideosection").style.display = "block"; 
                 document.getElementById("video").src = "https://www.youtube.com/embed/" + enbeded_id + ""
                 document.getElementById("videohead").innerText = conceptname;
             })
@@ -175,11 +197,14 @@
         </script> 
     </head>
     <body>
-        <div id="chaptertablesection"></div>
-        <div id = "concepttablesection"></div>
-        <div id="conceptvideosection">
-            <h2 id="videohead" ></h2>
-            <iframe id = "video"  width="560" height="315" src=""></iframe>        
+        <div id = "chaptertablesection"></div>
+        <div id = "chaptercontentsection">
+            <p id = "conceptlisthead">章節名稱:</p>
+            <div id = "concepttablesection"></div>
+            <div id = "conceptvideosection">
+                <h2 id = "videohead" ></h2>
+                <iframe id = "video"  width="560" height="315" src=""></iframe>        
+            </div>
         </div>
     </body>
 </html>
