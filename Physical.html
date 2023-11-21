@@ -2,14 +2,20 @@
 <html>
     <head>
         <style>
+        body{
+            margin: 0;
+        }
         #chaptertablesection{
             width: 100%;
             font-family: Georgia, 'Times New Roman', Times, serif;
         }
         #chaptercontentsection{
+            /* height is tempory setting to test the scroll funciton */
             font-family: Georgia, 'Times New Roman', Times, serif;
             width: 100%;
+            height: 1000px; 
             display: none;
+
         }
         
         #subjecthead{
@@ -20,10 +26,16 @@
             font-weight:900;
             margin-left: 8%;
             margin-bottom: 80px;
-
         }
 
-        a{text-decoration: none;}
+        a{
+            text-decoration: none;
+            color: black;        
+        }
+
+        a:hover{
+            color: rgb(74, 227, 74);
+        }
 
         .chapterable{
             text-align: center;
@@ -107,7 +119,7 @@
                 let index = 0;
                 let l1 = chapterset[0].length, l2 = chapterset[1].length, l3 = chapterset[2].length;
                 let prefix = "<td class=\"chaptertablecell\"><a href =\"javascript:void(0)\" onclick=\"javascript:conceptlist('"
-                let middle = "');return false;\">"
+                let middle = "');scroll_window('conceptlisthead');return false;\">"
                 let suffix = "</a></td>"
                 let dummy = "<td class=\"chaptertablecell\"></td>"
                 while (index < l1 || index < l2 || index < l3) {
@@ -145,6 +157,7 @@
             }
             return chapters
         }
+
     
         /* concepttable for the chapter */
     
@@ -159,12 +172,13 @@
                 firstconcept_chapter = rows[0].slice(1,-1)
                 for (var i = 0; i < rows.length;i++) {
                     let concept = rows[i].slice(1,-1)
-                    list.push("<p class = \"conceptlist\"><a href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + concept + "');return false;\">"+ concept + "</a></p>")
+                    list.push("<p class = \"conceptlist\"><a href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + concept + "');scroll_window('videohead');return false;\">"+ concept + "</a></p>")
                 }
                 document.getElementById("conceptlisthead").innerText = "章節名稱：" + chaptername
                 changeconcept(firstconcept_chapter)
                 document.getElementById("chaptercontentsection").style.display = "block";
                 document.getElementById("concepttablesection").innerHTML = list.join("")
+                scroll_window('conceptlisthead') //to fix the first click on chaptername when the chaptercontentsection's display is none will fail to scroll the window
             })
         }
 
@@ -190,6 +204,10 @@
                 document.getElementById("video").src = "https://www.youtube.com/embed/" + enbeded_id + ""
                 document.getElementById("videohead").innerText = conceptname;
             })
+        }
+        function scroll_window(item_id){
+            let element = document.getElementById(item_id+"")
+            element.scrollIntoView({block: "start", inline: "nearest", behavior: "smooth"})
         }
 
         tablecreate()
