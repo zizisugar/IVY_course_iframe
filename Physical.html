@@ -4,16 +4,17 @@
         <style>
         body{
             margin: 0;
+            width: 1440px;
         }
         #chaptertablesection{
-            width: 90%;
-            font-family: 'Zen Antique';
+            width: 100%;
+            font-family: 'Zen Antique';            
         }
         #chaptercontentsection{
             /* height is tempory setting to test the scroll funciton */
             font-family: 'Zen Antique';
             width: 100%;
-            height: auto;
+            height: 2000px;
             display: none;
 
         }
@@ -24,9 +25,11 @@
             height: 62px;
             font-size: 64px;
             font-weight:900;
-            margin-left: 190px;
+            margin-left: 100px;
             margin-top: 220px;
             margin-bottom: 80px;
+            position: relative;
+            display: block;
         }
 
         a{
@@ -40,10 +43,11 @@
 
         .chapterable{
             text-align: center;
-            width: 100%;
-            margin-left: 5%;
-            margin-right: 5%;
-
+            width: 1340px;
+            margin-left: 50px;
+            margin-right: 50px;
+            
+ 
         }
         .years{
             font-size: 48px;
@@ -57,14 +61,19 @@
             text-align: center;
             font-size: 40px;
             font-weight: 400;
+            margin-top: 10px;
+            margin-bottom: 10px;
             width: 33%;
             
         }
 
         #conceptlisthead{
             font-size: 48px;
-            margin-left: 7%;
             font-weight: 600;
+            text-align: left;
+            width: 476px;
+            height: 106px;
+            margin-left: 110px;
             margin-bottom: 20px;
             
         }
@@ -78,10 +87,11 @@
             font-family: 'Zen Antique';
             margin: 0%;
             font-size: 32px;
-            font-weight: 400;     
-            padding-left: 5%;
+            font-weight: 400;
+            margin-left: 100px;     
             padding-top: 5px;
             padding-bottom: 5px;
+            display: block;
         }
 
         #conceptlistsection{
@@ -195,7 +205,7 @@
                 firstconcept_chapter = rows[0].slice(1,-1)
                 for (var i = 0; i < rows.length;i++) {
                     let concept = rows[i].slice(1,-1)
-                    list.push("<p class = \"conceptlist\"><a href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + concept + "');scroll_window('videohead');return false;\">"+ concept + "</a></p>")
+                    list.push("<a class = \"conceptlist\" href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + concept + "');scroll_window('videohead');return false;\">"+ concept + "</a>")
                 }
                 document.getElementById("conceptlisthead").innerText = "章節名稱：" + chaptername
                 changeconcept(firstconcept_chapter)
