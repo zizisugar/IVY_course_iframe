@@ -4,31 +4,26 @@
         <style>
         body{
             margin: 0;
-            width: 1440px;
+            /* min-width: 600px; */
         }
         #chaptertablesection{
             width: 100%;
             font-family: 'Zen Antique';            
         }
+
         #chaptercontentsection{
             /* height is tempory setting to test the scroll funciton */
             font-family: 'Zen Antique';
             width: 100%;
-            height: 2000px;
+            height: 200%;
             display: none;
-
         }
         
         #subjecthead{
-            text-align: center;
-            width: 313px;
-            height: 62px;
-            font-size: 64px;
-            font-weight:900;
-            margin-left: 100px;
-            margin-top: 220px;
-            margin-bottom: 80px;
-            position: relative;
+            font-size: 4vw;
+            font-weight: 900;
+            padding-left: 12vw;
+            margin-top: 10vw;
             display: block;
         }
 
@@ -43,80 +38,64 @@
 
         .chapterable{
             text-align: center;
-            width: 1340px;
-            margin-left: 50px;
-            margin-right: 50px;
-            
- 
+            width: 100%;
+            /* padding-left: vw;
+            padding-right: vw; */
         }
         .years{
-            font-size: 48px;
+            font-size: 3vw;
             width: 33%;
-            height: 62px;
             font-weight: 600;
-            padding-bottom: 50px;
+            padding-bottom: 2vw;
+
         }
 
         .chaptertablecell{
             text-align: center;
-            font-size: 40px;
+            font-size: 2.5vw;
             font-weight: 400;
-            margin-top: 10px;
-            margin-bottom: 10px;
+            margin-top: 1vw;
+            margin-bottom: 1vw;
             width: 33%;
             
         }
 
         #conceptlisthead{
-            font-size: 48px;
+            font-size: 3vw;
             font-weight: 600;
             text-align: left;
-            width: 476px;
-            height: 106px;
-            margin-left: 110px;
-            margin-bottom: 20px;
+            margin-left: 10vw;
+            margin-bottom: 2vw;
             
         }
-        #listsection{
-            margin: 0%;
-            font-size: 32px;
-            font-weight: 400;
-        }
-        
         .conceptlist{
             font-family: 'Zen Antique';
             margin: 0%;
-            font-size: 32px;
             font-weight: 400;
-            margin-left: 100px;     
-            padding-top: 5px;
-            padding-bottom: 5px;
+            font-size: 2vw;
+            padding-top: 1vw;
+            padding-bottom: 1vw;
+            padding-left: 8vw;
             display: block;
+        }
+        #videohead{
+            font-size: 3vw;
         }
 
         #conceptlistsection{
-            padding-top: 20px;
-            padding-bottom: 20px;
             width: 100%;
             background-color: rgb(0, 164, 144, 0.13);
 
         }
         #animationheadersection{
-            padding-top: 20px;
-            padding-bottom: 20px;
             width: 100%;
             background-color: rgb(0, 173, 152, 0.4);
-
         }
 
         #praitceheardersection{
-            padding-top: 20px;
-            padding-bottom: 20px;
             width: 100%;
             background-color: rgb(0, 137, 121, 0.4);
-
         }
-    
         #conceptvideosection{
             text-align: center;
         }
@@ -235,7 +214,7 @@
                 concept_video_url = data.split(/\r?\n|\r/)
                 enbeded_id = getId(concept_video_url[0])
                 document.getElementById("video").src = "https://www.youtube.com/embed/" + enbeded_id + ""
-                document.getElementById("videohead").innerText = conceptname;
+                document.getElementById("videohead").innerText = "觀念影片: "+conceptname;
             })
         }
         function scroll_window(item_id){
@@ -261,7 +240,7 @@
                 </div>
             </div>
             <div id = "conceptvideosection">
-                <h2 id = "videohead" ></h2>
+                <p id = "videohead" ></p>
                 <iframe id = "video"  width = "560" height = "315" src = ""></iframe>        
             </div>
         </div>
