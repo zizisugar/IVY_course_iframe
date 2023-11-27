@@ -16,7 +16,7 @@
             /* height is tempory setting to test the scroll funciton */
             font-family: 'Zen Antique';
             width: 100%;
-            height: 200%;
+            height: auto;
             display: none;
         }
         
@@ -42,16 +42,16 @@
 
         .chapterable{
             text-align: center;
-            width: 94%;
-            margin-left: 3%;
-            margin-right: 3%;
-            margin-bottom: 6.25vw;;
+            width: 94vw;
+            margin-left: 3vw;
+            margin-right: 3vw;
+            margin-bottom: 6.25vw;
         }
         .years{
             font-size: 3.33vw;
-            width: 33%;
-            height: 4.3vw;
-            padding-bottom: 2vw;
+            width: 33.3%;
+            padding-top: 1vw;
+            padding-bottom: 1vw;
             font-weight: 600;
 
         }
@@ -60,17 +60,22 @@
             text-align: center;
             font-size: 2.78vw;
             font-weight: 400;
-            width: 33%;
-            height: 4.3vw;
-            padding-bottom: 2vw;
+            width: 33.3%;
+            padding-top: 1vw;
+            padding-bottom: 1vw;
             
+        }
+
+        #contenthead{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
         }
 
         #conceptlisthead{
             display: flex;
             font-size: 3.33vw;
             font-weight: 600;
-            justify-content: center;
             text-align: center;
             align-items: center;
             width: 33.06vw;
@@ -81,12 +86,13 @@
         }
 
         #returntopbuttom{
+            display: flex;
+            align-items: flex-end;
+            text-align: right;
             margin: 0%;
             padding: 0%;
-            text-align: right;
             font-size: 1.67vw;
             color: #6f6f6f;
-            display: block;
             padding-right: 1.59vw;
         }
 
@@ -258,8 +264,10 @@
     <body>
         <div id = "chaptertablesection"></div>
         <div id = "chaptercontentsection">
-            <p id = "conceptlisthead">章節名稱:</p>
-            <a id = "returntopbuttom" href = "javascript:void(0)" onclick = "javascript : scroll_window('chaptertablesection') ; return false;" >∧ return to top</a>
+            <div id = "contenthead">
+                <p id = "conceptlisthead">章節名稱:</p>
+                <a id = "returntopbuttom" href = "javascript:void(0)" onclick = "javascript : scroll_window('chaptertablesection') ; return false;" >∧ return to top</a>
+            </div>
             <div id = "listsection">
                 <div id = "conceptlistsection"></div>
                 <div id = "animationheadersection">
