@@ -9,7 +9,8 @@
         }
         #chaptertablesection{
             width: 100%;
-            font-family: 'Zen Antique';            
+            font-family: 'Zen Antique';
+            min-height: 70vw;            
         }
 
         #chaptercontentsection{
@@ -241,7 +242,7 @@
         /* function to change the video according to selected concept */
 
         function changeconcept(conceptname){
-            let selection = 'H where F contains"' + conceptname + '"'
+            let selection = 'I where F contains"' + conceptname + '"'
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
                 let concept_video_url = []
