@@ -132,7 +132,14 @@
             margin-bottom: 7.64vw;
         }
         #conceptvideosection{
+            display: flexbox;
+            justify-content: center;
+
             text-align: center;
+        }
+        .conceptvideo{
+            width: 60vw;
+            height: 30vw;
         }
         
         </style>
@@ -246,10 +253,15 @@
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
                 let concept_video_url = []
+                let embedvideosrc = []
+                let conceptvideos = "<p id = \"videohead\" >章節名稱 : " + conceptname + "</p>"
                 concept_video_url = data.split(/\r?\n|\r/)
-                enbeded_id = getId(concept_video_url[0])
-                document.getElementById("video").src = "https://www.youtube.com/embed/" + enbeded_id + ""
-                document.getElementById("videohead").innerText = "觀念影片: "+conceptname;
+                for( let i = 0 ; i < concept_video_url.length ; i++ ) {
+                    embeded_id = getId(concept_video_url[i])
+                    embedvideosrc = "https://www.youtube.com/embed/" + embeded_id + ""
+                    conceptvideos += " <iframe class = \"conceptvideo\"  src = \"" + embedvideosrc + "\"></iframe> "
+                }
+                document.getElementById("conceptvideosection").innerHTML = conceptvideos+""                
             })
         }
         function scroll_window(item_id){
@@ -278,10 +290,7 @@
                     <a class = "conceptlist" >練習題</a>
                 </div>
             </div>
-            <div id = "conceptvideosection">
-                <p id = "videohead" ></p>
-                <iframe id = "video"  width = "560" height = "315" src = ""></iframe>        
-            </div>
+            <div id = "conceptvideosection"></div>
         </div>
     </body>
 </html>
