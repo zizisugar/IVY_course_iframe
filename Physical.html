@@ -141,6 +141,17 @@
             width: 60vw;
             height: 30vw;
         }
+        #animationsection{
+            display: flex;
+            width: 80vw;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+
+        }
+        #animationsection_head{
+            font-size: 3.33vw;
+        }
         
         </style>
         <script type = "text/javascript">
@@ -165,7 +176,7 @@
             url = url_base + selection
             junior =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
     
-        /* bundle three different get requests' promise to build Chapter table */
+        /* bundle three different get requests' promises to build Chapter table */
 
             Promise.all([freshman,sophomore,junior]).then((chapterset) => {
                 let table = [];
@@ -206,7 +217,7 @@
             let rows = rawdata.split(/\r?\n|\r/)
             let chapters = []
             for (i = 1; i < rows.length; i++) {
-                var items = rows[i].split(",")
+                let items = rows[i].split(",")
                 chapters.push(items[0].slice(1,-1))
             }
             return chapters
@@ -249,6 +260,11 @@
         /* function to change the video according to selected concept */
 
         function changeconcept(conceptname){
+            concept_video_load(conceptname)
+            animation_load(conceptname)
+        }
+
+        function concept_video_load(conceptname){
             let selection = 'I where F contains"' + conceptname + '"'
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
@@ -264,6 +280,29 @@
                 document.getElementById("conceptvideosection").innerHTML = conceptvideos+""                
             })
         }
+
+        function animation_load(conceptname){
+            let selection = 'G, H where F contains"' + conceptname + '"'
+            let url = url_base + selection
+            fetch(url).then((response) => response.text()).then((data) => {        
+                let animation_url_explaination = []
+                let animation_url
+                let anmation_explaination
+                let animation_innerhtml = "<p id = \"animationsection_head\">動畫操作</p>"
+                animation_url_explaination = data.split(/\r?\n|\r/)
+                for( let i = 0 ; i < animation_url_explaination.length ; i++ ) {
+                    let url_explaination = animation_url_explaination[i].split(",")
+                    animation_url = url_explaination[0].slice(1,-1)
+                    animation_explaination = url_explaination[1].slice(1,-1)
+                    console.log(animation_url)
+                    console.log(animation_explaination)
+                    animation_innerhtml += "<p class = \"ani_explain\">" + animation_explaination + "</p>"
+                    animation_innerhtml += "<a class = \"ani_link\" href = " + animation_url + ">" + animation_url + "</a>"
+                }
+                document.getElementById("animationsection").innerHTML = animation_innerhtml + ""                
+            })
+        }
+
         function scroll_window(item_id){
             let element = document.getElementById(item_id+"")
             element.scrollIntoView({block: "start", inline: "nearest", behavior: "smooth"})
@@ -279,18 +318,19 @@
         <div id = "chaptercontentsection">
             <div id = "contenthead">
                 <p id = "conceptlisthead">章節名稱:</p>
-                <a id = "returntopbuttom" href = "javascript:void(0)" onclick = "javascript : scroll_window('chaptertablesection') ; return false;" >∧ return to top</a>
+                <a id = "returntopbuttom" href = "javascript:void(0)" onclick = "javascript : scroll_window('chaptertablesection') ; return false ;" >∧ return to top</a>
             </div>
             <div id = "listsection">
                 <div id = "conceptlistsection"></div>
                 <div id = "animationheadersection">
-                    <a class = "conceptlist" >動畫操作</a>
+                    <a class = "conceptlist" href = "javascript:void(0)" onclick = "javascript : scroll_window('animationsection') ; return false ;" >動畫操作</a>
                 </div>
                 <div id = "praitceheardersection">
                     <a class = "conceptlist" >練習題</a>
                 </div>
             </div>
             <div id = "conceptvideosection"></div>
+            <div id = "animationsection"></div>
         </div>
     </body>
 </html>
