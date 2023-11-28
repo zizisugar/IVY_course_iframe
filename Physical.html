@@ -134,24 +134,42 @@
         #conceptvideosection{
             display: flexbox;
             justify-content: center;
-
             text-align: center;
+            min-height: 80vh;
         }
         .conceptvideo{
             width: 60vw;
-            height: 30vw;
+            height: 45vw;
         }
         #animationsection{
             display: flex;
-            width: 80vw;
+            width: 100vw;
             flex-direction: column;
-            justify-content: center;
             text-align: center;
-
+            align-items: center;
+            min-height: 80vh;
         }
         #animationsection_head{
             font-size: 3.33vw;
         }
+        .ani_explain{
+            width: 80vw;
+            text-align: left;
+        }
+
+        .ani_link_head{
+            color: #00A490;
+            width: 80vw;
+            text-align: left;
+            margin: 0;
+        }
+        .ani_link{
+            color: #00A490;
+            width: 80vw;
+            text-align: center;
+            border: 0.3vw solid;
+        }
+
         
         </style>
         <script type = "text/javascript">
@@ -233,11 +251,14 @@
                 let rows = [];
                 let list = [];
                 let firstconcept_chapter;
+                let existconcept = new Set();
                 rows = data.split(/\r?\n|\r/)
                 firstconcept_chapter = rows[0].slice(1,-1)
                 for (var i = 0; i < rows.length;i++) {
                     let concept = rows[i].slice(1,-1)
+                    if(existconcept.has(concept)) { continue }
                     list.push("<a class = \"conceptlist\" href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + concept + "');scroll_window('videohead');return false;\">"+ concept + "</a>")
+                    existconcept.add(concept)
                 }
                 document.getElementById("conceptlisthead").innerText = "章節名稱：" + chaptername
                 changeconcept(firstconcept_chapter)
@@ -297,6 +318,7 @@
                     console.log(animation_url)
                     console.log(animation_explaination)
                     animation_innerhtml += "<p class = \"ani_explain\">" + animation_explaination + "</p>"
+                    animation_innerhtml += "<p class = \"ani_link_head\">點擊進入操作</p>"
                     animation_innerhtml += "<a class = \"ani_link\" href = " + animation_url + ">" + animation_url + "</a>"
                 }
                 document.getElementById("animationsection").innerHTML = animation_innerhtml + ""                
