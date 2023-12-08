@@ -219,13 +219,15 @@
         /* fetch data */    
             
             let freshman,sophomore,junior
-            let selection = 'E , count(B) where D contains \"' + subject + '\" AND C contains' + '"一" group by E'
+            let selection = 'E where D contains \"' + subject + '\" AND C contains' + '"一"'
             let url = url_base + selection
-            freshman = fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
-            selection = 'E , count(B) where D contains \"' + subject + '\" AND C contains' + '"二" group by E'
+            freshman = fetch(url).then((response) => response.text()).then((data) => {
+                console.log(data)
+                return data_handle(data)})
+            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"二"'
             url = url_base + selection
             sophomore =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
-            selection = 'E , count(B) where D contains \"' + subject + '\" AND C contains' + '"三" group by E'
+            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"三"'
             url = url_base + selection
             junior =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
     
@@ -264,9 +266,17 @@
         function data_handle(rawdata){
             let rows = rawdata.split(/\r?\n|\r/)
             let chapters = []
-            for (i = 1; i < rows.length; i++) {
+            let contains_chap = new Set()
+            for (i = 0; i < rows.length; i++) {
                 let items = rows[i].split(",")
-                chapters.push(items[0].slice(1,-1))
+                let chaptername = items[0].slice(1,-1)
+                if (contains_chap.has(chaptername)) {
+                    continue;
+                }
+                else {
+                    chapters.push(chaptername)
+                    contains_chap.add(items[0].slice(1,-1))
+                }
             }
             return chapters
         }
@@ -345,8 +355,6 @@
                     let url_explaination = animation_url_explaination[i].split(",")
                     animation_url = url_explaination[0].slice(1,-1)
                     animation_explaination = url_explaination[1].slice(1,-1)
-                    console.log(animation_url)
-                    console.log(animation_explaination)
                     animation_innerhtml += "<p class = \"ani_explain\">" + animation_explaination + "</p>"
                     animation_innerhtml += "<p class = \"ani_link_head\">點擊進入操作</p>"
                     animation_innerhtml += "<a class = \"ani_link\" href = " + animation_url + ">" + animation_url + "</a>"
