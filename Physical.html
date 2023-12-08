@@ -4,13 +4,64 @@
         <style>
         body{
             margin: 0;
-            font-family: 'Zen Antique';
-            /* min-width: 600px; */
+            font-family: 'Zen Antique Soft';
         }
-        #chaptertablesection{
-            width: 100%;
-            font-family: 'Zen Antique';
-            min-height: 70vw;            
+
+        #subjecthead{
+            font-size: 4.44vw; /* 64 / 1440 * 100 */
+            font-weight: 900;
+            width: 21.74vw;
+            height: 6.46vw;
+            margin-top: 15.2vw;
+            margin-left: 6.59vw;
+            margin-bottom: 0.003vw;
+            text-align: center;
+            justify-content: center;
+            display: block;
+        }
+
+        #chaptertable{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-self: center;
+            justify-content: space-between;
+            width: 79.32vw;
+            min-height: 50vw;
+            margin-left: 10.34vw;
+            margin-right: 10.34vw;
+            margin-bottom: 6.25vw;            
+
+        }
+        .chapterlist{
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            width: 20.55vw;
+            align-items: center;
+            margin-top: 2.36vw;
+            margin-bottom: 2.36vw;
+        }
+        .chapterlist p{
+            line-height: 4.861vw;
+            width: 11.39vw;
+            height: 4.861vw;
+            font-size: 3.33vw;
+            font-weight: 900;
+            margin-top: 0.97vw;
+            margin-bottom: 0.868vw;
+        }
+        .chapterlist a{
+            width: 11.39vw;
+            height: 4.027vw;
+            line-height: 4.027vw;
+            font-size: 2.78vw;
+            font-style: normal;
+            font-weight: 900;
+            margin: 0.59vw;
+            margin-bottom: 0.59vw;
+            margin-left: 0;
+            margin-right: 0;
         }
 
         #chaptercontentsection{
@@ -19,17 +70,6 @@
             width: 100%;
             height: auto;
             display: none;
-        }
-        
-        #subjecthead{
-            font-size: 4.44vw; /* 64 / 1440 * 100 */
-            font-weight: 900;
-            width: 21.74vw;
-            margin-top: 15.2vw;
-            margin-left: 6.59vw;
-            text-align: center;
-            margin-bottom: 5vw;
-            display: block;             
         }
 
         a{
@@ -41,36 +81,11 @@
             color: #00A490;
         }
 
-        .chapterable{
-            text-align: center;
-            width: 94vw;
-            margin-left: 3vw;
-            margin-right: 3vw;
-            margin-bottom: 6.25vw;
-        }
-        .years{
-            font-size: 3.33vw;
-            width: 33.3%;
-            padding-top: 1vw;
-            padding-bottom: 1vw;
-            font-weight: 600;
-
-        }
-
-        .chaptertablecell{
-            text-align: center;
-            font-size: 2.78vw;
-            font-weight: 400;
-            width: 33.3%;
-            padding-top: 1vw;
-            padding-bottom: 1vw;
-            
-        }
-
         #contenthead{
             display: flex;
             justify-content: space-between;
             flex-direction: row;
+            align-items: center;
         }
 
         #conceptlisthead{
@@ -81,15 +96,17 @@
             align-items: center;
             width: 33.06vw;
             height: 7.09vw;
-            margin-left: 8.62vw;
+            margin-left: 6.67vw;
             margin-top: 0;
             margin-bottom: 0%;            
         }
 
         #returntopbuttom{
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             text-align: right;
+            height: 2.36vw;
+            line-height: 2.36vw;
             margin: 0%;
             padding: 0%;
             font-size: 1.67vw;
@@ -170,7 +187,6 @@
             border: 0.3vw solid;
         }
 
-        
         </style>
         <script type = "text/javascript">
 
@@ -197,36 +213,31 @@
         /* bundle three different get requests' promises to build Chapter table */
 
             Promise.all([freshman,sophomore,junior]).then((chapterset) => {
-                let table = [];
-                table.push("<tr><th class =\"years\">高一</th><th class =\"years\">高二</th><th class =\"years\">高三</th></tr>")
-                let index = 0;
+                let year1 = []
+                let year2 = []
+                let year3 = []
+                let index = 0
                 let l1 = chapterset[0].length, l2 = chapterset[1].length, l3 = chapterset[2].length;
-                let prefix = "<td class=\"chaptertablecell\"><a href =\"javascript:void(0)\" onclick=\"javascript:conceptlist('"
-                let middle = "');scroll_window('conceptlisthead');return false;\">"
-                let suffix = "</a></td>"
-                let dummy = "<td class=\"chaptertablecell\"></td>"
+                let prefix = "<a href =\"javascript:void(0)\" onclick=\"javascript:conceptlist('"
+                let middle= "');scroll_window('conceptlisthead');return false;\">"
+                let suffix = "</a>"
+                
                 while (index < l1 || index < l2 || index < l3) {
-                    table.push("<tr>")
                     if (index < l1) {
-                        table.push(prefix + chapterset[0][index] + middle + chapterset[0][index] + suffix + "")
-                    } else {
-                        table.push(dummy);
+                        year1.push(prefix + chapterset[0][index] + middle + chapterset[0][index] + suffix + "")
                     } 
                     if (index < l2) {
-                        table.push(prefix + chapterset[1][index] + middle + chapterset[1][index] + suffix + "")
-                    } else {
-                        table.push(dummy);
-                    }
+                        year2.push(prefix + chapterset[1][index] + middle + chapterset[1][index] + suffix + "")
+                    } 
                     if (index < l3) {
-                        table.push(prefix + chapterset[2][index] + middle + chapterset[2][index] + suffix + "")
-                    } else {
-                        table.push(dummy);
-                    }
-                    table.push("</tr>")
+                        year3.push(prefix + chapterset[2][index] + middle + chapterset[2][index] + suffix + "")
+                    } 
                     index+=1;
                 }
-                table = "<p id=\"subjecthead\">"+subject+"</p><table class=\"chapterable\">" +table.join("") +"</table>"
-                document.getElementById("chaptertablesection").innerHTML = table
+                document.getElementById("subjecthead").innerText = subject + ""
+                document.getElementsByClassName("chapterlist")[0].innerHTML = "<p>高一</p>" + year1.join("")
+                document.getElementsByClassName("chapterlist")[1].innerHTML = "<p>高二</p>" + year2.join("")
+                document.getElementsByClassName("chapterlist")[2].innerHTML = "<p>高三</p>" + year3.join("")
             });
             
         }
@@ -243,7 +254,7 @@
 
     
         /* concepttable for the chapter */
-    
+
         function conceptlist(chaptername){
             let selection = 'F where E contains"' + chaptername + '"'
             let url  = url_base + selection
@@ -336,7 +347,14 @@
         </script> 
     </head>
     <body>
-        <div id = "chaptertablesection"></div>
+        <div id = "chaptertablesection">
+            <p id = "subjecthead"></p>
+            <div id = "chaptertable">
+                <div class  = "chapterlist"></div>
+                <div class  = "chapterlist"></div>
+                <div class  = "chapterlist"></div>
+            </div>
+        </div>
         <div id = "chaptercontentsection">
             <div id = "contenthead">
                 <p id = "conceptlisthead">章節名稱:</p>
