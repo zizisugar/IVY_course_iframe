@@ -176,7 +176,6 @@
             flex-direction: column;
             text-align: center;
             align-items: center;
-            min-height: 80vh;
         }
         #animationsection_head{
             font-size: 3.33vw;
@@ -189,6 +188,7 @@
             text-align: left;
             font-size: 2.22vw;
             font-weight: 900;
+            margin: 0;
         }
 
         .ani_link_head{
@@ -206,6 +206,10 @@
             border: 0.3vw solid;
             font-size: 2.22vw;
             font-weight: 900;
+            display:inline-block;
+            word-wrap: break-word;
+            padding: 1vw;
+            margin-bottom: 5vw;
         }
 
         </style>
@@ -344,8 +348,8 @@
             })
         }
 
-        function animation_load(conceptname){
-            let selection = 'G, H where F contains"' + conceptname + '"' + ' AND A != \"EX\"'
+        function animation_load(chaptername){
+            let selection = 'G, H where E contains"' + chaptername + '"' + ' AND A != \"EX\"'
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
                 let animation_url_explaination = []
@@ -357,9 +361,11 @@
                     let url_explaination = animation_url_explaination[i].split(",")
                     animation_url = url_explaination[0].slice(1,-1)
                     animation_explaination = url_explaination[1].slice(1,-1)
+                    if (animation_url.length == 0) 
+                        continue
                     animation_innerhtml += "<p class = \"ani_explain\">" + animation_explaination + "</p>"
                     animation_innerhtml += "<p class = \"ani_link_head\">點擊進入操作</p>"
-                    animation_innerhtml += "<a class = \"ani_link\" href = " + animation_url + ">" + animation_url + "</a>"
+                    animation_innerhtml += "<a class = \"ani_link\" href = \"" + animation_url + "\">" + animation_url + "</a>"
                 }
                 document.getElementById("animationsection").innerHTML = animation_innerhtml + ""                
             })
