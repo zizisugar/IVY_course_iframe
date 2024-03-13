@@ -221,15 +221,15 @@
         /* fetch data */    
             
             let freshman,sophomore,junior
-            let selection = 'E where D contains \"' + subject + '\" AND C contains' + '"一"'
+            let selection = 'E where D contains \"' + subject + '\" AND C contains' + '"一"' + ' AND A != \"EX\" AND B ="高中"'
             let url = url_base + selection
             freshman = fetch(url).then((response) => response.text()).then((data) => {
                 console.log(data)
                 return data_handle(data)})
-            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"二"'
+            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"二"'  + ' AND A != \"EX\" AND B ="高中"'
             url = url_base + selection
             sophomore =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
-            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"三"'
+            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"三"' + ' AND A != \"EX\" AND B ="高中"'
             url = url_base + selection
             junior =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
     
@@ -287,7 +287,7 @@
         /* concepttable for the chapter */
 
         function conceptlist(chaptername){
-            let selection = 'F where E contains"' + chaptername + '"'
+            let selection = 'F where E contains"' + chaptername + '"' + ' AND A != \"EX\"'
             let url  = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {
                 let rows = [];
@@ -345,7 +345,7 @@
         }
 
         function animation_load(conceptname){
-            let selection = 'G, H where F contains"' + conceptname + '"'
+            let selection = 'G, H where F contains"' + conceptname + '"' + ' AND A != \"EX\"'
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
                 let animation_url_explaination = []
