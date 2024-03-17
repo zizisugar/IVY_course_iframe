@@ -168,6 +168,7 @@
         .conceptvideo{
             width: 66.875vw;
             height: 39.79vw;
+            margin-top: 5vw;
             margin-bottom: 7.57vw;
         }
         #animationsection{
@@ -176,7 +177,6 @@
             flex-direction: column;
             text-align: center;
             align-items: center;
-            min-height: 80vh;
         }
         #animationsection_head{
             font-size: 3.33vw;
@@ -189,6 +189,7 @@
             text-align: left;
             font-size: 2.22vw;
             font-weight: 900;
+            margin: 0;
         }
 
         .ani_link_head{
@@ -206,6 +207,10 @@
             border: 0.3vw solid;
             font-size: 2.22vw;
             font-weight: 900;
+            display:inline-block;
+            word-wrap: break-word;
+            padding: 1vw;
+            margin-bottom: 5vw;
         }
 
         </style>
@@ -213,7 +218,7 @@
 
         /* use gviz to request the data from google spreadsheet  */
 
-        const url_base = 'https://docs.google.com/spreadsheets/d/1EsiS7h3QJNDn0hIvGr6pKy-7yS5EIkmlf-OfZhaqCFg/gviz/tq?tqx=out:csv&tq=SELECT '
+        const url_base = 'https://docs.google.com/spreadsheets/d/1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM/gviz/tq?tqx=out:csv&tq=SELECT '
         const subject = '物理'
 
         function tablecreate(){
@@ -221,15 +226,15 @@
         /* fetch data */    
             
             let freshman,sophomore,junior
-            let selection = 'E where D contains \"' + subject + '\" AND C contains' + '"一"'
+            let selection = 'E where D contains \"' + subject + '\" AND C contains' + '"一"' + ' AND A != \"EX\" AND B ="高中"'
             let url = url_base + selection
             freshman = fetch(url).then((response) => response.text()).then((data) => {
                 console.log(data)
                 return data_handle(data)})
-            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"二"'
+            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"二"'  + ' AND A != \"EX\" AND B ="高中"'
             url = url_base + selection
             sophomore =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
-            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"三"'
+            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"三"' + ' AND A != \"EX\" AND B ="高中"'
             url = url_base + selection
             junior =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
     
@@ -287,7 +292,7 @@
         /* concepttable for the chapter */
 
         function conceptlist(chaptername){
-            let selection = 'F where E contains"' + chaptername + '"'
+            let selection = 'F where E contains"' + chaptername + '"' + ' AND A != \"EX\"'
             let url  = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {
                 let rows = [];
@@ -299,11 +304,11 @@
                 for (var i = 0; i < rows.length;i++) {
                     let concept = rows[i].slice(1,-1)
                     if(existconcept.has(concept)) { continue }
-                    list.push("<a class = \"conceptlist\" href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + concept + "');scroll_window('videohead');return false;\">"+ concept + "</a>")
+                    list.push("<a class = \"conceptlist\" href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + chaptername + "','" + concept + "');scroll_window('videohead');return false;\">"+ concept + "</a>")
                     existconcept.add(concept)
                 }
                 document.getElementById("conceptlisthead").innerText = "章節名稱：" + chaptername
-                changeconcept(firstconcept_chapter)
+                changeconcept(chaptername, firstconcept_chapter)
                 document.getElementById("chaptercontentsection").style.display = "block";
                 document.getElementById("conceptlistsection").innerHTML = list.join("")
                 scroll_window('conceptlisthead') //to fix the first click on chaptername when the chaptercontentsection's display is none will fail to scroll the window
@@ -322,13 +327,13 @@
 
         /* function to change the video according to selected concept */
 
-        function changeconcept(conceptname){
-            concept_video_load(conceptname)
-            animation_load(conceptname)
+        function changeconcept(chaptername, conceptname){
+            concept_video_load(chaptername,conceptname)
+            animation_load(chaptername)
         }
 
-        function concept_video_load(conceptname){
-            let selection = 'I where F contains"' + conceptname + '"'
+        function concept_video_load(chaptername, conceptname){
+            let selection = 'I where E contains "'+chaptername+'" AND F contains "' + conceptname + '"' + ' AND A != \"EX\"'
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
                 let concept_video_url = []
@@ -344,8 +349,8 @@
             })
         }
 
-        function animation_load(conceptname){
-            let selection = 'G, H where F contains"' + conceptname + '"'
+        function animation_load(chaptername){
+            let selection = 'G, H where E contains "' + chaptername + '"' + ' AND A != \"EX\"'
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
                 let animation_url_explaination = []
@@ -357,9 +362,11 @@
                     let url_explaination = animation_url_explaination[i].split(",")
                     animation_url = url_explaination[0].slice(1,-1)
                     animation_explaination = url_explaination[1].slice(1,-1)
+                    if (animation_url.length == 0) 
+                        continue
                     animation_innerhtml += "<p class = \"ani_explain\">" + animation_explaination + "</p>"
                     animation_innerhtml += "<p class = \"ani_link_head\">點擊進入操作</p>"
-                    animation_innerhtml += "<a class = \"ani_link\" href = " + animation_url + ">" + animation_url + "</a>"
+                    animation_innerhtml += "<a class = \"ani_link\" href = \"" + animation_url + "\">" + animation_url + "</a>"
                 }
                 document.getElementById("animationsection").innerHTML = animation_innerhtml + ""                
             })
