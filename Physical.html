@@ -168,6 +168,7 @@
         .conceptvideo{
             width: 66.875vw;
             height: 39.79vw;
+            margin-top: 5vw;
             margin-bottom: 7.57vw;
         }
         #animationsection{
@@ -303,11 +304,11 @@
                 for (var i = 0; i < rows.length;i++) {
                     let concept = rows[i].slice(1,-1)
                     if(existconcept.has(concept)) { continue }
-                    list.push("<a class = \"conceptlist\" href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + concept + "');scroll_window('videohead');return false;\">"+ concept + "</a>")
+                    list.push("<a class = \"conceptlist\" href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + chaptername + "','" + concept + "');scroll_window('videohead');return false;\">"+ concept + "</a>")
                     existconcept.add(concept)
                 }
                 document.getElementById("conceptlisthead").innerText = "章節名稱：" + chaptername
-                changeconcept(firstconcept_chapter)
+                changeconcept(chaptername, firstconcept_chapter)
                 document.getElementById("chaptercontentsection").style.display = "block";
                 document.getElementById("conceptlistsection").innerHTML = list.join("")
                 scroll_window('conceptlisthead') //to fix the first click on chaptername when the chaptercontentsection's display is none will fail to scroll the window
@@ -326,13 +327,13 @@
 
         /* function to change the video according to selected concept */
 
-        function changeconcept(conceptname){
-            concept_video_load(conceptname)
-            animation_load(conceptname)
+        function changeconcept(chaptername, conceptname){
+            concept_video_load(chaptername,conceptname)
+            animation_load(chaptername)
         }
 
-        function concept_video_load(conceptname){
-            let selection = 'I where F contains"' + conceptname + '"'
+        function concept_video_load(chaptername, conceptname){
+            let selection = 'I where E contains "'+chaptername+'" AND F contains "' + conceptname + '"' + ' AND A != \"EX\"'
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
                 let concept_video_url = []
@@ -349,7 +350,7 @@
         }
 
         function animation_load(chaptername){
-            let selection = 'G, H where E contains"' + chaptername + '"' + ' AND A != \"EX\"'
+            let selection = 'G, H where E contains "' + chaptername + '"' + ' AND A != \"EX\"'
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
                 let animation_url_explaination = []
