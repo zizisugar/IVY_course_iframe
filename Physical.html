@@ -353,7 +353,7 @@
             let match = origin_yt_url.match(regExp);
             return (match && match[1].length === 11)
             ? match[1]
-            : 0;
+            : null;
         }
         function getFormId(origin_form_url){
             // let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
