@@ -246,9 +246,15 @@
         <script type = "text/javascript">
 
         /* use gviz to request the data from google spreadsheet  */
-
-        const url_base = 'https://docs.google.com/spreadsheets/d/1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM/gviz/tq?tqx=out:csv&tq=SELECT '
+        let url_base = 'https://docs.google.com/spreadsheets/d/1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM/gviz/tq?gid=%GID%&tqx=out:csv&tq=SELECT '
         const subject = '物理'
+        const hash_subject = {
+            '物理': '0',
+            '化學': '1931802034',
+            '數學': '663005280',
+            '理化': '315328052'
+        }
+        url_base = url_base.replace("%GID%", hash_subject[subject])
 
         function tablecreate(){
 
