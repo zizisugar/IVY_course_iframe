@@ -246,24 +246,31 @@
         <script type = "text/javascript">
 
         /* use gviz to request the data from google spreadsheet  */
-
-        const url_base = 'https://docs.google.com/spreadsheets/d/1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM/gviz/tq?tqx=out:csv&tq=SELECT '
+        let url_base = 'https://docs.google.com/spreadsheets/d/1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM/gviz/tq?gid=%GID%&tqx=out:csv&tq=SELECT '
         const subject = '物理'
+        const education = '高'
+        const hash_subject = {
+            '物理': '0',
+            '化學': '1931802034',
+            '數學': '663005280',
+            '理化': '315328052'
+        }
+        url_base = url_base.replace("%GID%", hash_subject[subject])
 
         function tablecreate(){
 
         /* fetch data */    
             
             let freshman,sophomore,junior
-            let selection = 'E where D contains \"' + subject + '\" AND C contains' + '"一"' + ' AND A != \"EX\" AND B ="高中"'
+            let selection = 'E where D contains \"' + subject + '\" AND C contains' + '"一"' + ' AND A != \"EX\" AND B ="%EDU%中"'.replace("%EDU%",education)
             let url = url_base + selection
             freshman = fetch(url).then((response) => response.text()).then((data) => {
                 console.log(data)
                 return data_handle(data)})
-            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"二"'  + ' AND A != \"EX\" AND B ="高中"'
+            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"二"'  + ' AND A != \"EX\" AND B ="%EDU%中"'.replace("%EDU%",education)
             url = url_base + selection
             sophomore =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
-            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"三"' + ' AND A != \"EX\" AND B ="高中"'
+            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"三"' + ' AND A != \"EX\" AND B ="%EDU%中"'.replace("%EDU%",education)
             url = url_base + selection
             junior =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
     
@@ -292,9 +299,9 @@
                     index+=1;
                 }
                 document.getElementById("subjecthead").innerText = subject + ""
-                document.getElementsByClassName("chapterlist")[0].innerHTML = "<p>高一</p>" + year1.join("")
-                document.getElementsByClassName("chapterlist")[1].innerHTML = "<p>高二</p>" + year2.join("")
-                document.getElementsByClassName("chapterlist")[2].innerHTML = "<p>高三</p>" + year3.join("")
+                document.getElementsByClassName("chapterlist")[0].innerHTML = "<p>%EDU%一</p>".replace("%EDU%",education) + year1.join("")
+                document.getElementsByClassName("chapterlist")[1].innerHTML = "<p>%EDU%二</p>".replace("%EDU%",education) + year2.join("")
+                document.getElementsByClassName("chapterlist")[2].innerHTML = "<p>%EDU%三</p>".replace("%EDU%",education) + year3.join("")
             });
             
         }
@@ -370,7 +377,7 @@
         }
 
         function concept_video_load(chaptername, conceptname){
-            let selection = 'I where E contains "'+chaptername+'" AND F contains "' + conceptname + '"' + ' AND A != \"EX\"'
+            let selection = 'G where E contains "'+chaptername+'" AND F contains "' + conceptname + '"' + ' AND A != \"EX\"'
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
                 let concept_video_url = []
@@ -389,7 +396,7 @@
         }
 
         function animation_load(chaptername){
-            let selection = 'G, H where E contains "' + chaptername + '"' + ' AND A != \"EX\"'
+            let selection = 'H, I where E contains "' + chaptername + '"' + ' AND A != \"EX\"'
             let url = url_base + selection
             fetch(url).then((response) => response.text()).then((data) => {        
                 let animation_url_explaination = []
