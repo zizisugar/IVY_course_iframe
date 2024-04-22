@@ -274,6 +274,39 @@
             var urlBase = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID_HASH[EDUCATION][SUBJECT]}`;
 
 
+            async function LoadData(targetData, grade, plusCondition = "") {
+                //makeQuery
+                const selection = `SELECT ${targetData}`;
+                const baseCondition = ` WHERE ${COL_HASH['example']} != "EX" \
+                    AND ${COL_HASH['國高中']} = "${EDUCATION}" AND ${COL_HASH['年級']} = "${grade}"  \
+                    AND ${COL_HASH['課程名稱']} = "${SUBJECT}"`;
+                const url = urlBase + `&tqx=out:csv&tq=${selection + baseCondition + plusCondition}`;
+
+                // need try catch error handling (Resolve, reject)
+                const dupArr = await fetch(url).then((response) => response.text()).then(arr => {
+                    const cleanArr = arr.split('"').filter(n => n.match(`.`) && !n.match('\,')); // remove ',', ' ', '"'
+
+                    // group by
+                    const colNum = (targetData.split(',')).length;
+
+                    if (colNum === 1) {
+                        // dedup when only 1-D array
+                        return cleanArr.filter((item, pos, self) => {
+                            return self.indexOf(item) === pos;
+                        });
+                    }
+                    else {
+                        const groupArr = Array.from({ length: Math.ceil(cleanArr.length / colNum) }, () => []);
+                        cleanArr.forEach((value, index, array) => {
+                            const returnIdx = Math.floor(index / colNum);
+                            groupArr[returnIdx].push(value);
+                        });
+                        return groupArr;
+                    }
+
+                }).catch(err => console.log("test Fetch ERR-", err));
+                return dupArr;
+            }
 
         function tablecreate(){
 
@@ -324,23 +357,6 @@
             
         }
 
-        function data_handle(rawdata){
-            let rows = rawdata.split(/\r?\n|\r/)
-            let chapters = []
-            let contains_chap = new Set()
-            for (i = 0; i < rows.length; i++) {
-                let items = rows[i].split(",")
-                let chaptername = items[0].slice(1,-1)
-                if (contains_chap.has(chaptername)) {
-                    continue;
-                }
-                else {
-                    chapters.push(chaptername)
-                    contains_chap.add(items[0].slice(1,-1))
-                }
-            }
-            return chapters
-        }
 
     
         /* concepttable for the chapter */
