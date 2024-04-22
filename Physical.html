@@ -263,7 +263,7 @@
             }
 
         </style>
-        <script type = "text/javascript">
+        <script type="text/javascript">
             const SHEET_ID = '1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM';
             const EDUCATION = '高中';
             const SUBJECT = '物理';
@@ -292,7 +292,6 @@
                 }
             }
             var urlBase = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID_HASH[EDUCATION][SUBJECT]}`;
-
 
             async function LoadData(targetData, grade, plusCondition = "") {
                 //makeQuery
@@ -422,6 +421,7 @@
             function ScrollWindow(htmlTagID) {
                 document.getElementById(htmlTagID).scrollIntoView({ block: "start", inline: "nearest", behavior: "smooth" })
             }
+
 
             document.addEventListener("DOMContentLoaded", CreateChapterList)
 
