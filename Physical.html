@@ -366,35 +366,34 @@
 
             }
 
+            async function LoadAnimation(chapterName, grade) {
+                document.getElementById("ani-section").innerHTML = '<p id = "animation-section-head">動畫操作</p>';
+                let aniSectionData = "";
+                await LoadData([COL_HASH['概念動畫'], COL_HASH['動畫解釋']].join(','), grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`).then(
+                    (listArr) => {
+                        listArr.forEach((eleArr) => {
+                            let url, desc;
+                            if (eleArr[0].startsWith("http")) {
+                                url = eleArr[0];
+                                desc = eleArr[1] === undefined ? "" : eleArr[1];
+                            }
+                            else {
+                                url = "";
+                                desc = eleArr[0];
+                            }
+                            aniSectionData += ` <p class="ani-explain">${desc}</p> <a class="ani-link" href="${url}">${url}</a>`;
+                        });
+                    });
+                document.getElementById("ani-section").innerHTML += aniSectionData;
+
+            }
+
         function getFormId(origin_form_url){
             // let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
             let match = origin_form_url.match("e\/(.+?)\/viewform");
             return match[1];
         }
 
-
-        function animation_load(chaptername){
-            let selection = 'G, H where E contains "' + chaptername + '"' + ' AND A != \"EX\"'
-            let url = url_base + selection
-            fetch(url).then((response) => response.text()).then((data) => {        
-                let animation_url_explaination = []
-                let animation_url
-                let anmation_explaination
-                let animation_innerhtml = "<p id = \"animationsection_head\">動畫操作</p>"
-                animation_url_explaination = data.split(/\r?\n|\r/)
-                for( let i = 0 ; i < animation_url_explaination.length ; i++ ) {
-                    let url_explaination = animation_url_explaination[i].split(",")
-                    animation_url = url_explaination[0].slice(1,-1)
-                    animation_explaination = url_explaination[1].slice(1,-1)
-                    if (animation_url.length == 0) 
-                        continue
-                    animation_innerhtml += "<p class = \"ani_explain\">" + animation_explaination + "</p>"
-                    animation_innerhtml += "<p class = \"ani_link_head\">點擊進入操作</p>"
-                    animation_innerhtml += "<a class = \"ani_link\" href = \"" + animation_url + "\">" + animation_url + "</a>"
-                }
-                document.getElementById("animationsection").innerHTML = animation_innerhtml + ""                
-            })
-        }
         function exercise_load(chaptername){
             let selection = 'J where E contains"' + chaptername + '"' + ' AND A != \"EX\"'
             let url = url_base + selection
