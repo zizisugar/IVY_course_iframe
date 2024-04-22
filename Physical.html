@@ -408,31 +408,25 @@
         </script> 
     </head>
     <body>
-        <div id = "chaptertablesection">
-            <p id = "subjecthead"></p>
-            <div id = "chaptertable">
-                <div class  = "chapterlist"></div>
-                <div class  = "chapterlist"></div>
-                <div class  = "chapterlist"></div>
-            </div>
+        <div><a id="return-button" href="javascript:void(0)">∧ return to top</a></div>
+        <div id="catalog-section">
+            <p id="subject-title"></p>
+            <div id="grade-section"></div>
         </div>
-        <div id = "chaptercontentsection">
-            <div id = "contenthead">
-                <p id = "conceptlisthead">章節名稱:</p>
-                <a id = "returntopbuttom" href = "javascript:void(0)" onclick = "javascript : scroll_window('chaptertablesection') ; return false ;" >∧ return to top</a>
+        <div id="content-section">
+            <div id="content-title">
+                <p id="concept-title">章節名稱:</p>
             </div>
-            <div id = "listsection">
-                <div id = "conceptlistsection"></div>
-                <div id = "animationheadersection">
-                    <a class = "conceptlist" href = "javascript:void(0)" onclick = "javascript : scroll_window('animationsection') ; return false ;" >動畫操作</a>
-                </div>
-                <div id = "exerciseheadersection">
-                    <a class = "conceptlist" href = "javascript:void(0)" onclick = "javascript : scroll_window('exercisesection') ; return false ;" >練習題</a>
-                </div>
+            <div id="content-outline-section">
+                <div id="content-outline-of-concept"></div>
+                <div id="content-outline-of-animation"><a class="content-outline-list" href="javascript:void(0)"
+                        onclick="javascript : ScrollWindow('animation-section-head') ; return false ;">動畫操作</a></div>
+                <div id="content-outline-of-exercise"><a class="content-outline-list" href="javascript:void(0)"
+                        onclick="javascript : ScrollWindow('exercise-section-head') ; return false ;">練習題</a></div>
             </div>
-            <div id = "conceptvideosection"></div>
-            <div id = "animationsection"></div>
-            <div id = "exercisesection"></div>
+            <div id="video-section"></div>
+            <div id="ani-section"></div>
+            <div id="exe-section"></div>
         </div>
     </body>
 </html>
