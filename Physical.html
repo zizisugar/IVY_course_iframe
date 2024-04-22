@@ -354,41 +354,24 @@
                 LoadExercise(chapterName, grade)
             }
 
+            async function LoadVideo(chapterName, conceptName, grade) {
+                document.getElementById("video-section").innerHTML = '<p id = "video-head" >觀念影片 : ' + conceptName + '</p>';
 
-        /* change the youtube URL to its video id# */
+                const videoURLList = await LoadData(COL_HASH['觀念影片'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}" AND ${COL_HASH['觀念名稱']} = "${conceptName}"`);
 
-        function getYouTubeId(origin_yt_url){
-            let regExp = "^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?\"]*)";
-            let match = origin_yt_url.match(regExp);
-            return (match && match[1].length === 11)
-            ? match[1]
-            : null;
-        }
+                const videoEmbedList = videoURLList.map(url => {
+                    return ` <iframe class="conceptvideo"  src="https://www.youtube.com/embed/${url.match('(?:youtu.be/)(.{11})')[1]}"></iframe>`;
+                }).join("");
+                document.getElementById("video-section").innerHTML += videoEmbedList;
+
+            }
+
         function getFormId(origin_form_url){
             // let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
             let match = origin_form_url.match("e\/(.+?)\/viewform");
             return match[1];
         }
 
-
-        function concept_video_load(chaptername, conceptname){
-            let selection = 'I where E contains "'+chaptername+'" AND F contains "' + conceptname + '"' + ' AND A != \"EX\"'
-            let url = url_base + selection
-            fetch(url).then((response) => response.text()).then((data) => {        
-                let concept_video_url = []
-                let embedvideosrc = []
-                let conceptvideos = "<p id = \"videohead\" >觀念影片 : " + conceptname + "</p>"
-                concept_video_url = data.split(/\r?\n|\r/)
-                for( let i = 0 ; i < concept_video_url.length ; i++ ) {
-                    embeded_id = getYouTubeId(concept_video_url[i])
-                    if(embeded_id === null)
-                        continue                    
-                    embedvideosrc = "https://www.youtube.com/embed/" + embeded_id + ""
-                    conceptvideos += " <iframe class = \"conceptvideo\"  src = \"" + embedvideosrc + "\"></iframe> "
-                }
-                document.getElementById("conceptvideosection").innerHTML = conceptvideos+""                
-            })
-        }
 
         function animation_load(chaptername){
             let selection = 'G, H where E contains "' + chaptername + '"' + ' AND A != \"EX\"'
