@@ -388,30 +388,16 @@
 
             }
 
-        function getFormId(origin_form_url){
-            // let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-            let match = origin_form_url.match("e\/(.+?)\/viewform");
-            return match[1];
-        }
+            async function LoadExercise(chapterName, grade) {
+                document.getElementById("exe-section").innerHTML = '<p id="exercise-section-head" >練習題</p>';
 
-        function exercise_load(chaptername){
-            let selection = 'J where E contains"' + chaptername + '"' + ' AND A != \"EX\"'
-            let url = url_base + selection
-            fetch(url).then((response) => response.text()).then((data) => {        
-                let exercise_form_url = []
-                let embedsrc = []
-                let exerciseforms = "<p id = \"exercisesection_head\" >練習題</p>"
-                exercise_form_url = data.split(/\r?\n|\r/)
-                for( let i = 0 ; i < exercise_form_url.length ; i++ ) {
-                    if (exercise_form_url[i].length < 5) 
-                        continue
-                    embeded_id = getFormId(exercise_form_url[i])
-                    embedsrc = "https://docs.google.com/forms/d/e/" + embeded_id + "/viewform?embedded=true"
-                    exerciseforms += "<iframe class=\"exerciseform\" src = \"" + embedsrc + "\" ></iframe> " 
-                }
-                document.getElementById("exercisesection").innerHTML = exerciseforms+""              
-            })
-        }
+                const exerciseURLList = await LoadData(COL_HASH['練習題'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
+                const exerciseList = exerciseURLList.map(url => {
+                    return ` <iframe class="exerciseform" src="${'https://docs.google.com/forms/d/e/' + url.match("e\/(.+?)\/viewform")[1] + '/viewform?embedded=true'}"></iframe>`;
+                }).join("");
+                document.getElementById("exe-section").innerHTML += exerciseList;
+
+            }
 
         function scroll_window(item_id){
             let element = document.getElementById(item_id+"")
