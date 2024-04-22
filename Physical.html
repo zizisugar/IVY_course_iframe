@@ -307,55 +307,26 @@
                 }).catch(err => console.log("test Fetch ERR-", err));
                 return dupArr;
             }
-
-        function tablecreate(){
-
-        /* fetch data */    
             
-            let freshman,sophomore,junior
-            let selection = 'E where D contains \"' + subject + '\" AND C contains' + '"一"' + ' AND A != \"EX\" AND B ="高中"'
-            let url = url_base + selection
-            freshman = fetch(url).then((response) => response.text()).then((data) => {
-                console.log(data)
-                return data_handle(data)})
-            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"二"'  + ' AND A != \"EX\" AND B ="高中"'
-            url = url_base + selection
-            sophomore =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
-            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"三"' + ' AND A != \"EX\" AND B ="高中"'
-            url = url_base + selection
-            junior =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
-    
-        /* bundle three different get requests' promises to build Chapter table */
+            async function CreateChapterList() {
+                async function CreateDiv(grade) {
+                    const chapterList = await LoadData(COL_HASH['章節名稱'], grade);
 
-            Promise.all([freshman,sophomore,junior]).then((chapterset) => {
-                let year1 = []
-                let year2 = []
-                let year3 = []
-                let index = 0
-                let l1 = chapterset[0].length, l2 = chapterset[1].length, l3 = chapterset[2].length;
-                let prefix = "<a href =\"javascript:void(0)\" onclick=\"javascript:conceptlist('"
-                let middle= "');scroll_window('conceptlisthead');return false;\">"
-                let suffix = "</a>"
-                
-                while (index < l1 || index < l2 || index < l3) {
-                    if (index < l1) {
-                        year1.push(prefix + chapterset[0][index] + middle + chapterset[0][index] + suffix + "")
-                    } 
-                    if (index < l2) {
-                        year2.push(prefix + chapterset[1][index] + middle + chapterset[1][index] + suffix + "")
-                    } 
-                    if (index < l3) {
-                        year3.push(prefix + chapterset[2][index] + middle + chapterset[2][index] + suffix + "")
-                    } 
-                    index+=1;
+                    // buildChapterLink
+                    const chapterLinks = chapterList.map(chapter => {
+                        return ` <a href="javascript:void(0)" onclick="javascript:CreateChapterContent('${chapter}','${grade}',true);ScrollWindow('concept-title');return false;">${chapter}</a>`;
+                    }).join("");
+                    const chapterLinkList = ` <p>${EDUCATION[0]}${grade}</p>${chapterLinks}`;
+                    return `<div class="chapter-list" id="${grade}">` + chapterLinkList + '</div>';
                 }
-                document.getElementById("subjecthead").innerText = subject + ""
-                document.getElementsByClassName("chapterlist")[0].innerHTML = "<p>高一</p>" + year1.join("")
-                document.getElementsByClassName("chapterlist")[1].innerHTML = "<p>高二</p>" + year2.join("")
-                document.getElementsByClassName("chapterlist")[2].innerHTML = "<p>高三</p>" + year3.join("")
-            });
-            
-        }
+
+                document.getElementById("subject-title").innerText = SUBJECT;
+                const gradeSectionData = await Promise.all(['一', '二', '三'].map(grade => CreateDiv(grade)));
+                document.getElementById("grade-section").innerHTML = gradeSectionData.join('');
+
+
+            }
+
 
 
     
