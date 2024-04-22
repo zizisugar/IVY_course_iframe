@@ -402,9 +402,35 @@
             function ScrollWindow(htmlTagID) {
                 document.getElementById(htmlTagID).scrollIntoView({ block: "start", inline: "nearest", behavior: "smooth" })
             }
-            
+
             document.addEventListener("DOMContentLoaded", CreateChapterList)
 
+            window.addEventListener('scroll', CheckPosition, false);
+            function CheckPosition() {
+                const returnButtonSelector = document.querySelector("#return-button");
+                const catalogRange = document.getElementById("catalog-section").getBoundingClientRect().bottom;
+                const contentRange = document.getElementById("content-section").getBoundingClientRect().top;
+                // console.log(catalogRange, contentRange)//, typeof(contentRange),(contentRange > 0))
+                if (catalogRange < 500 && (contentRange > 0 && contentRange < 500)) {
+                    returnButtonSelector.classList.add("scrolling");
+                    returnButtonSelector.innerText = "^ return to top"
+                    returnButtonSelector.onclick = function () {
+                        ScrollWindow('catalog-section');
+                        return false;
+                    }
+                }
+                else if (catalogRange < 0 && contentRange < 0) {
+                    returnButtonSelector.classList.add("scrolling");
+                    returnButtonSelector.innerText = "^ return to chapter"
+                    returnButtonSelector.onclick = function () {
+                        ScrollWindow('concept-title');
+                        return false;
+                    }
+                }
+                else {
+                    returnButtonSelector.classList.remove("scrolling");
+                }
+            }
         </script> 
     </head>
     <body>
