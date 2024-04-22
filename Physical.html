@@ -399,13 +399,11 @@
 
             }
 
-        function scroll_window(item_id){
-            let element = document.getElementById(item_id+"")
-            element.scrollIntoView({block: "start", inline: "nearest", behavior: "smooth"})
-        }
-
-
-        tablecreate()
+            function ScrollWindow(htmlTagID) {
+                document.getElementById(htmlTagID).scrollIntoView({ block: "start", inline: "nearest", behavior: "smooth" })
+            }
+            
+            document.addEventListener("DOMContentLoaded", CreateChapterList)
 
         </script> 
     </head>
