@@ -244,11 +244,36 @@
 
         </style>
         <script type = "text/javascript">
+            const SHEET_ID = '1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM';
+            const EDUCATION = '高中';
+            const SUBJECT = '物理';
 
-        /* use gviz to request the data from google spreadsheet  */
+            const COL_HASH = {
+                'example': 'A',
+                '國高中': 'B',
+                '年級': 'C',
+                '課程名稱': 'D',
+                '章節名稱': 'E',
+                '觀念名稱': 'F',
+                '觀念影片': 'G',
+                '概念動畫': 'H',
+                '動畫解釋': 'I',
+                '練習題': 'J'
+            };
+            const GID_HASH = {
+                '高中': {
+                    '物理': '0',
+                    '化學': '1931802034',
+                    '數學': '663005280',
+                    '地球科學': '2068702923'
+                },
+                '國中': {
+                    '理化': '315328052'
+                }
+            }
+            var urlBase = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID_HASH[EDUCATION][SUBJECT]}`;
 
-        const url_base = 'https://docs.google.com/spreadsheets/d/1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM/gviz/tq?tqx=out:csv&tq=SELECT '
-        const subject = '物理'
+
 
         function tablecreate(){
 
