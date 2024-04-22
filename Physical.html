@@ -2,469 +2,451 @@
 <html>
     <head>
         <style>
-        body{
-            margin: 0;
-            font-family: 'Zen Antique Soft';
-        }
+            body {
+                margin: 0;
+                font-family: 'Zen Antique Soft';
+            }
 
-        #subjecthead{
-            font-size: 4.44vw; /* 64 / 1440 * 100 */
-            font-weight: 900;
-            width: 21.74vw;
-            height: 6.46vw;
-            padding-top: 7.29vw;
-            margin-top: 0;
-            margin-left: 6.59vw;
-            margin-bottom: 0.003vw;
-            text-align: center;
-            justify-content: center;
-            display: block;
-        }
+            /* font-size
+                vw => $px / 1440 * 100
+                2.77vw = 40 / 1440 * 100
 
-        #chaptertable{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            align-self: center;
-            justify-content: space-between;
-            width: 79.32vw;
-            min-height: 50vw;
-            margin-left: 10.34vw;
-            margin-right: 10.34vw;
-            margin-bottom: 6.25vw;
-            padding-top: 2.36vw;            
+                there are 5 types of font-size.x
+            */
 
-        }
-        .chapterlist{
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            width: 20.55vw;
-            align-items: center;
-            margin-top: 2.36vw;
-            margin-bottom: 2.36vw;
-        }
-        .chapterlist p{
-            line-height: 4.861vw;
-            width: 11.39vw;
-            height: 4.861vw;
-            font-size: 3.33vw;
-            font-weight: 900;
-            margin-top: 0.97vw;
-            margin-bottom: 0.868vw;
-        }
-        .chapterlist a{
-            width: 11.39vw;
-            height: 4.027vw;
-            line-height: 4.027vw;
-            font-size: 2.78vw;
-            font-style: normal;
-            font-weight: 900;
-            margin: 0.59vw;
-            margin-bottom: 0.59vw;
-            margin-left: 0;
-            margin-right: 0;
-        }
+            #subject-title {
+                font-size: 2.77vw;
+                font-weight: 900;
+                width: 21.74vw;
+                height: 6.46vw;
+                padding-top: 7.29vw;
+                margin-top: 0;
+                margin-left: 6.59vw;
+                margin-bottom: 0.003vw;
+                text-align: center;
+                justify-content: center;
+                display: block;
+            }
 
-        #chaptercontentsection{
-            font-family: 'Zen Antique';
-            width: 100%;
-            display: none;
-        }
+            #grade-section {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-self: center;
+                justify-content: space-between;
+                width: 79.32vw;
+                min-height: 50vw;
+                margin-left: 10.34vw;
+                margin-right: 10.34vw;
+                margin-bottom: 6.25vw;
+            }
 
-        a{
-            text-decoration: none;
-            color: black;        
-        }
+            .chapter-list {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                width: 20.55vw;
+                align-items: center;
+                margin-top: 1.1vw;
+                margin-bottom: 2.36vw;
+            }
 
-        a:hover{
-            color: #00A490;
-        }
+            .chapter-list p {
+                line-height: 4.861vw;
+                width: 11.39vw;
+                height: 4.861vw;
+                font-size: 2.5vw;
+                font-weight: 900;
+                margin-top: 0.1vw;
+                margin-bottom: 0.868vw;
+            }
 
-        #contenthead{
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row;
-            align-items: center;
-        }
+            .chapter-list a {
+                width: 11.39vw;
+                height: 4.027vw;
+                line-height: 4.027vw;
+                font-size: 2.22vw;
+                font-style: normal;
+                font-weight: 900;
+                margin: 0.59vw;
+                margin-bottom: 0.59vw;
+                margin-left: 0;
+                margin-right: 0;
+            }
 
-        #conceptlisthead{
-            display: block;
-            font-size: 3.33vw;
-            font-weight: 600;
-            text-align: left;
-            width: 33.06vw;
-            height: 7.09vw;
-            line-height: 7.09vw;
-            margin-left: 6.67vw;
-            margin-top: 0;
-            margin-bottom: 0%;            
-        }
+            #content-section {
+                font-family: 'Zen Antique';
+                width: 100%;
+                display: none;
+            }
 
-        #returntopbuttom{
-            display: flex;
-            align-items: center;
-            text-align: right;
-            height: 2.36vw;
-            line-height: 2.36vw;
-            margin: 0%;
-            padding: 0%;
-            font-size: 1.67vw;
-            color: #6f6f6f;
-            padding-right: 6.67vw;
-        }
+            a {
+                text-decoration: none;
+                color: black;
+            }
 
-        #conceptlistsection{
-            width: 100%;
-            background-color: rgb(0, 164, 144, 0.13);
-            padding-top: 1vw;
-            padding-bottom: 1vw;
-        }
-        #conceptlistsection a{
-            padding-top: 0;
-            padding-bottom: 0;
-        }
+            a:hover {
+                color: #00A490;
+            }
 
-        .conceptlist{
-            margin: 0%;
-            font-weight: 400;
-            font-size: 2.22vw;
-            padding-top: 1vw;
-            padding-bottom: 1vw;
-            margin-left: 8.62vw;
-            text-align: left;
-            display: block;
-        }
+            #content-title {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                align-items: center;
+            }
 
-        #videohead{
-            font-size: 3.33vw;
-            font-weight: 900;
-            margin-top: 1vw;
-            margin-bottom: 1vw;
-            width: 44.51vw;
-            height: 7.08vw;
-        }
+            #concept-title {
+                display: block;
+                font-size: 2.5vw;
+                font-weight: 600;
+                text-align: left;
+                width: 33.06vw;
+                height: 7.09vw;
+                line-height: 7.09vw;
+                margin-left: 6.67vw;
+                margin-top: 0;
+                margin-bottom: 0%;
+            }
 
-        #animationheadersection{
-            width: 100%;
-            background-color: rgb(0, 173, 152, 0.4);
-        }
+            #return-button {
+                display: none;
+                font-size: 1.11vw;
+                color: #6f6f6f;
+                margin-top: 2%;
+                margin-left: 80%;
+                position: fixed;
+            }
 
-        #exerciseheadersection{
-            width: 100%;
-            background-color: rgb(0, 137, 121, 0.4);
-        }
+            #return-button:hover {
+                color: #00A490;
+            }
 
-        #listsection{
-            margin-bottom: 7.64vw;
-        }
-        #conceptvideosection{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            /* min-height: 80vh; */
-        }
-        .conceptvideo{
-            width: 66.875vw;
-            height: 39.79vw;
-            margin-top: 5vw;
-            margin-bottom: 7.57vw;
-        }
-        .exerciseform{
-            /* width: 66.875vw;
-            height: 39.79vw;
-            margin-top: 5vw;
-            margin-bottom: 7.57vw; */
-            width: 100%;
-            height: 80vh;
-            border: 0;
-            /* margin-top: 5vw; */
-            margin-bottom: 5vw;
-            /* frameborder=\"100%\" height=\"600\" frameborder=\"0\" marginheight=\"500vh\" marginwidth=\"0\" */
-        }
-        #animationsection{
-            display: flex;
-            width: 100vw;
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
-            margin-bottom: 8vw;
-        }
-        #exercisesection{
-            display: flex;
-            width: 100vw;
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
-            /* min-height: 1vh; */
-            margin-bottom: 8vw;
-        }
-        #animationsection_head{
-            font-size: 3.33vw;
-            font-weight: 900;
-            margin-top: 1vw;
-            margin-bottom: 1vw;
-        }
-        #exercisesection_head{
-            font-size: 3.33vw;
-            font-weight: 900;
-            margin-top: 0;
-            margin-bottom: 1vw;
-            text-align: center;
-        }
-        .ani_explain{
-            width: 60vw;
-            text-align: left;
-            font-size: 2.22vw;
-            font-weight: 900;
-            margin: 0;
-        }
+            #return-button.scrolling {
+                display: flex;
+            }
 
-        .ani_link_head{
-            color: #00A490;
-            width: 60vw;
-            text-align: left;
-            margin: 0;
-            font-size: 2.22vw;
-            font-weight: 900;
-        }
-        .ani_link{
-            color: #00A490;
-            width: 60vw;
-            text-align: center;
-            border: 0.3vw solid;
-            font-size: 2.22vw;
-            font-weight: 900;
-            display:inline-block;
-            word-wrap: break-word;
-            padding: 1vw;
-            margin-bottom: 5vw;
-        }
+
+            #content-outline-of-concept {
+                width: 100%;
+                background-color: rgb(0, 164, 144, 0.13);
+                padding-top: 1vw;
+                padding-bottom: 1vw;
+            }
+
+            #content-outline-of-concept a {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .content-outline-list {
+                margin: 0%;
+                font-weight: 400;
+                font-size: 1.6vw;
+                padding-top: 1vw;
+                padding-bottom: 1vw;
+                margin-left: 8.62vw;
+                text-align: left;
+                display: block;
+            }
+
+            #video-head {
+                font-size: 2.5vw;
+                font-weight: 900;
+                margin-top: 1vw;
+                margin-bottom: 1vw;
+                /* width: 60vw; */
+                height: 7.08vw;
+                padding-top: 3vw;
+                text-wrap: pretty;
+            }
+
+            #content-outline-of-animation {
+                width: 100%;
+                background-color: rgb(0, 173, 152, 0.4);
+            }
+
+            #content-outline-of-exercise {
+                width: 100%;
+                background-color: rgb(0, 137, 121, 0.4);
+            }
+
+            #content-outline-section {
+                margin-bottom: 7.64vw;
+            }
+
+            #video-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                /* min-height: 80vh; */
+            }
+
+            .conceptvideo {
+                width: 66.875vw;
+                height: 39.79vw;
+                margin-top: 3vw;
+                margin-bottom: 7.57vw;
+            }
+
+            .exerciseform {
+                width: 100%;
+                height: 80vh;
+                border: 0;
+                /* margin-top: 5vw; */
+                margin-bottom: 5vw;
+            }
+
+            #ani-section {
+                display: flex;
+                width: 100vw;
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 8vw;
+            }
+
+            #exe-section {
+                display: flex;
+                width: 100vw;
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+                min-height: 100vh;
+                margin-bottom: 8vw;
+            }
+
+            #animation-section-head {
+                font-size: 2.5vw;
+                font-weight: 900;
+                margin-top: 1vw;
+                margin-bottom: 1vw;
+            }
+
+            #exercise-section-head {
+                font-size: 2.5vw;
+                font-weight: 900;
+                margin-top: 0;
+                margin-bottom: 1vw;
+                text-align: center;
+            }
+
+            .ani-explain {
+                width: 60vw;
+                text-align: left;
+                font-size: 1.45vw;
+                font-weight: 900;
+                margin: 0;
+            }
+
+            .ani-link-head {
+                color: #00A490;
+                width: 60vw;
+                text-align: left;
+                margin: 0;
+                font-size: 1.45vw;
+                font-weight: 900;
+            }
+
+            .ani-link {
+                color: #00A490;
+                width: 60vw;
+                text-align: center;
+                border: 0.3vw solid;
+                font-size: 1.45vw;
+                font-weight: 900;
+                display: inline-block;
+                word-wrap: break-word;
+                padding: 1vw;
+                margin-bottom: 5vw;
+            }
 
         </style>
         <script type = "text/javascript">
+            const SHEET_ID = '1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM';
+            const EDUCATION = '高中';
+            const SUBJECT = '物理';
 
-        /* use gviz to request the data from google spreadsheet  */
-
-        const url_base = 'https://docs.google.com/spreadsheets/d/1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM/gviz/tq?tqx=out:csv&tq=SELECT '
-        const subject = '物理'
-
-        function tablecreate(){
-
-        /* fetch data */    
-            
-            let freshman,sophomore,junior
-            let selection = 'E where D contains \"' + subject + '\" AND C contains' + '"一"' + ' AND A != \"EX\" AND B ="高中"'
-            let url = url_base + selection
-            freshman = fetch(url).then((response) => response.text()).then((data) => {
-                console.log(data)
-                return data_handle(data)})
-            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"二"'  + ' AND A != \"EX\" AND B ="高中"'
-            url = url_base + selection
-            sophomore =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
-            selection = 'E where D contains \"' + subject + '\" AND C contains' + '"三"' + ' AND A != \"EX\" AND B ="高中"'
-            url = url_base + selection
-            junior =  fetch(url).then((response) => response.text()).then((data) => {return data_handle(data)})
-    
-        /* bundle three different get requests' promises to build Chapter table */
-
-            Promise.all([freshman,sophomore,junior]).then((chapterset) => {
-                let year1 = []
-                let year2 = []
-                let year3 = []
-                let index = 0
-                let l1 = chapterset[0].length, l2 = chapterset[1].length, l3 = chapterset[2].length;
-                let prefix = "<a href =\"javascript:void(0)\" onclick=\"javascript:conceptlist('"
-                let middle= "');scroll_window('conceptlisthead');return false;\">"
-                let suffix = "</a>"
-                
-                while (index < l1 || index < l2 || index < l3) {
-                    if (index < l1) {
-                        year1.push(prefix + chapterset[0][index] + middle + chapterset[0][index] + suffix + "")
-                    } 
-                    if (index < l2) {
-                        year2.push(prefix + chapterset[1][index] + middle + chapterset[1][index] + suffix + "")
-                    } 
-                    if (index < l3) {
-                        year3.push(prefix + chapterset[2][index] + middle + chapterset[2][index] + suffix + "")
-                    } 
-                    index+=1;
-                }
-                document.getElementById("subjecthead").innerText = subject + ""
-                document.getElementsByClassName("chapterlist")[0].innerHTML = "<p>高一</p>" + year1.join("")
-                document.getElementsByClassName("chapterlist")[1].innerHTML = "<p>高二</p>" + year2.join("")
-                document.getElementsByClassName("chapterlist")[2].innerHTML = "<p>高三</p>" + year3.join("")
-            });
-            
-        }
-
-        function data_handle(rawdata){
-            let rows = rawdata.split(/\r?\n|\r/)
-            let chapters = []
-            let contains_chap = new Set()
-            for (i = 0; i < rows.length; i++) {
-                let items = rows[i].split(",")
-                let chaptername = items[0].slice(1,-1)
-                if (contains_chap.has(chaptername)) {
-                    continue;
-                }
-                else {
-                    chapters.push(chaptername)
-                    contains_chap.add(items[0].slice(1,-1))
+            const COL_HASH = {
+                'example': 'A',
+                '國高中': 'B',
+                '年級': 'C',
+                '課程名稱': 'D',
+                '章節名稱': 'E',
+                '觀念名稱': 'F',
+                '觀念影片': 'G',
+                '概念動畫': 'H',
+                '動畫解釋': 'I',
+                '練習題': 'J'
+            };
+            const GID_HASH = {
+                '高中': {
+                    '物理': '0',
+                    '化學': '1931802034',
+                    '數學': '663005280',
+                    '地球科學': '2068702923'
+                },
+                '國中': {
+                    '理化': '315328052'
                 }
             }
-            return chapters
-        }
+            var urlBase = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID_HASH[EDUCATION][SUBJECT]}`;
 
-    
-        /* concepttable for the chapter */
 
-        function conceptlist(chaptername){
-            let selection = 'F where E contains"' + chaptername + '"' + ' AND A != \"EX\"'
-            let url  = url_base + selection
-            fetch(url).then((response) => response.text()).then((data) => {
-                let rows = [];
-                let list = [];
-                let firstconcept_chapter;
-                let existconcept = new Set();
-                rows = data.split(/\r?\n|\r/).filter(function (elm){
-                    return (elm.slice(1,-1).length != 0); // elm != null && elm !== false && elm != ""
-                })
-                firstconcept_chapter = rows[0].slice(1,-1)
-                for (var i = 0; i < rows.length;i++) {
-                    let concept = rows[i].slice(1,-1)
-                    if(existconcept.has(concept)) { continue }
-                    list.push("<a class = \"conceptlist\" href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + chaptername + "','" + concept + "');scroll_window('videohead');return false;\">"+ concept + "</a>")
-                    existconcept.add(concept)
+            async function LoadData(targetData, grade, plusCondition = "") {
+                //makeQuery
+                const selection = `SELECT ${targetData}`;
+                const baseCondition = ` WHERE ${COL_HASH['example']} != "EX" \
+                    AND ${COL_HASH['國高中']} = "${EDUCATION}" AND ${COL_HASH['年級']} = "${grade}"  \
+                    AND ${COL_HASH['課程名稱']} = "${SUBJECT}"`;
+                const url = urlBase + `&tqx=out:csv&tq=${selection + baseCondition + plusCondition}`;
+
+                // need try catch error handling (Resolve, reject)
+                const dupArr = await fetch(url).then((response) => response.text()).then(arr => {
+                    const cleanArr = arr.split('"').filter(n => n.match(`.`) && !n.match('\,')); // remove ',', ' ', '"'
+
+                    // group by
+                    const colNum = (targetData.split(',')).length;
+
+                    if (colNum === 1) {
+                        // dedup when only 1-D array
+                        return cleanArr.filter((item, pos, self) => {
+                            return self.indexOf(item) === pos;
+                        });
+                    }
+                    else {
+                        const groupArr = Array.from({ length: Math.ceil(cleanArr.length / colNum) }, () => []);
+                        cleanArr.forEach((value, index, array) => {
+                            const returnIdx = Math.floor(index / colNum);
+                            groupArr[returnIdx].push(value);
+                        });
+                        return groupArr;
+                    }
+
+                }).catch(err => console.log("test Fetch ERR-", err));
+                return dupArr;
+            }
+
+            async function CreateChapterList() {
+                async function CreateDiv(grade) {
+                    const chapterList = await LoadData(COL_HASH['章節名稱'], grade);
+
+                    // buildChapterLink
+                    const chapterLinks = chapterList.map(chapter => {
+                        return ` <a href="javascript:void(0)" onclick="javascript:CreateChapterContent('${chapter}','${grade}',true);ScrollWindow('concept-title');return false;">${chapter}</a>`;
+                    }).join("");
+                    const chapterLinkList = ` <p>${EDUCATION[0]}${grade}</p>${chapterLinks}`;
+                    return `<div class="chapter-list" id="${grade}">` + chapterLinkList + '</div>';
                 }
-                document.getElementById("conceptlisthead").innerText = "章節名稱：" + chaptername
-                changeconcept(chaptername, firstconcept_chapter)
-                document.getElementById("chaptercontentsection").style.display = "block";
-                document.getElementById("conceptlistsection").innerHTML = list.join("")
-                scroll_window('conceptlisthead') //to fix the first click on chaptername when the chaptercontentsection's display is none will fail to scroll the window
-            })
-        }
 
-        /* change the youtube URL to its video id# */
-
-        function getYouTubeId(origin_yt_url){
-            let regExp = "^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?\"]*)";
-            let match = origin_yt_url.match(regExp);
-            return (match && match[1].length === 11)
-            ? match[1]
-            : null;
-        }
-        function getFormId(origin_form_url){
-            // let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-            let match = origin_form_url.match("e\/(.+?)\/viewform");
-            return match[1];
-        }
-
-        /* function to change the video according to selected concept */
-
-        function changeconcept(chaptername, conceptname){
-            concept_video_load(chaptername,conceptname)
-            animation_load(chaptername)
-            exercise_load(chaptername)
-        }
-
-        function concept_video_load(chaptername, conceptname){
-            let selection = 'I where E contains "'+chaptername+'" AND F contains "' + conceptname + '"' + ' AND A != \"EX\"'
-            let url = url_base + selection
-            fetch(url).then((response) => response.text()).then((data) => {        
-                let concept_video_url = []
-                let embedvideosrc = []
-                let conceptvideos = "<p id = \"videohead\" >觀念影片 : " + conceptname + "</p>"
-                concept_video_url = data.split(/\r?\n|\r/)
-                for( let i = 0 ; i < concept_video_url.length ; i++ ) {
-                    embeded_id = getYouTubeId(concept_video_url[i])
-                    if(embeded_id === null)
-                        continue                    
-                    embedvideosrc = "https://www.youtube.com/embed/" + embeded_id + ""
-                    conceptvideos += " <iframe class = \"conceptvideo\"  src = \"" + embedvideosrc + "\"></iframe> "
-                }
-                document.getElementById("conceptvideosection").innerHTML = conceptvideos+""                
-            })
-        }
-
-        function animation_load(chaptername){
-            let selection = 'G, H where E contains "' + chaptername + '"' + ' AND A != \"EX\"'
-            let url = url_base + selection
-            fetch(url).then((response) => response.text()).then((data) => {        
-                let animation_url_explaination = []
-                let animation_url
-                let anmation_explaination
-                let animation_innerhtml = "<p id = \"animationsection_head\">動畫操作</p>"
-                animation_url_explaination = data.split(/\r?\n|\r/)
-                for( let i = 0 ; i < animation_url_explaination.length ; i++ ) {
-                    let url_explaination = animation_url_explaination[i].split(",")
-                    animation_url = url_explaination[0].slice(1,-1)
-                    animation_explaination = url_explaination[1].slice(1,-1)
-                    if (animation_url.length == 0) 
-                        continue
-                    animation_innerhtml += "<p class = \"ani_explain\">" + animation_explaination + "</p>"
-                    animation_innerhtml += "<p class = \"ani_link_head\">點擊進入操作</p>"
-                    animation_innerhtml += "<a class = \"ani_link\" href = \"" + animation_url + "\">" + animation_url + "</a>"
-                }
-                document.getElementById("animationsection").innerHTML = animation_innerhtml + ""                
-            })
-        }
-        function exercise_load(chaptername){
-            let selection = 'J where E contains"' + chaptername + '"' + ' AND A != \"EX\"'
-            let url = url_base + selection
-            fetch(url).then((response) => response.text()).then((data) => {        
-                let exercise_form_url = []
-                let embedsrc = []
-                let exerciseforms = "<p id = \"exercisesection_head\" >練習題</p>"
-                exercise_form_url = data.split(/\r?\n|\r/)
-                for( let i = 0 ; i < exercise_form_url.length ; i++ ) {
-                    if (exercise_form_url[i].length < 5) 
-                        continue
-                    embeded_id = getFormId(exercise_form_url[i])
-                    embedsrc = "https://docs.google.com/forms/d/e/" + embeded_id + "/viewform?embedded=true"
-                    exerciseforms += "<iframe class=\"exerciseform\" src = \"" + embedsrc + "\" ></iframe> " 
-                }
-                document.getElementById("exercisesection").innerHTML = exerciseforms+""              
-            })
-        }
-
-        function scroll_window(item_id){
-            let element = document.getElementById(item_id+"")
-            element.scrollIntoView({block: "start", inline: "nearest", behavior: "smooth"})
-        }
+                document.getElementById("subject-title").innerText = SUBJECT;
+                const gradeSectionData = await Promise.all(['一', '二', '三'].map(grade => CreateDiv(grade)));
+                document.getElementById("grade-section").innerHTML = gradeSectionData.join('');
 
 
-        tablecreate()
+            }
+
+            async function CreateChapterContent(chapterName, grade, click = false) {
+                document.getElementById("content-section").style.display = "block";
+                document.getElementById("concept-title").innerText = "章節名稱：" + chapterName;
+
+                //buildConceptSection
+                const conceptList = await LoadData(COL_HASH['觀念名稱'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
+                const conceptLinks = conceptList.map(conceptName => {
+                    return ` <a class="content-outline-list" href="javascript:void(0)" onclick="javascript:LoadVideo('${chapterName}','${conceptName}', '${grade}');ScrollWindow('video-head');return false;">${conceptName}</a>`;
+                }).join("");
+                document.getElementById("content-outline-of-concept").innerHTML = conceptLinks;
+
+                LoadContent(chapterName, grade, conceptList[0]);
+
+
+            }
+
+            function LoadContent(chapterName, grade, defaultContent = None) { // wait for everything
+                //buildVideoSection
+                LoadVideo(chapterName, defaultContent, grade)
+
+                //buildAnimationSection
+                LoadAnimation(chapterName, grade)
+
+                //buildExerciseSection
+                LoadExercise(chapterName, grade)
+            }
+
+            async function LoadVideo(chapterName, conceptName, grade) {
+                document.getElementById("video-section").innerHTML = '<p id = "video-head" >觀念影片 : ' + conceptName + '</p>';
+
+                const videoURLList = await LoadData(COL_HASH['觀念影片'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}" AND ${COL_HASH['觀念名稱']} = "${conceptName}"`);
+
+                const videoEmbedList = videoURLList.map(url => {
+                    return ` <iframe class="conceptvideo"  src="https://www.youtube.com/embed/${url.match('(?:youtu.be/)(.{11})')[1]}"></iframe>`;
+                }).join("");
+                document.getElementById("video-section").innerHTML += videoEmbedList;
+
+            }
+
+            async function LoadAnimation(chapterName, grade) {
+                document.getElementById("ani-section").innerHTML = '<p id = "animation-section-head">動畫操作</p>';
+                let aniSectionData = "";
+                await LoadData([COL_HASH['概念動畫'], COL_HASH['動畫解釋']].join(','), grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`).then(
+                    (listArr) => {
+                        listArr.forEach((eleArr) => {
+                            let url, desc;
+                            if (eleArr[0].startsWith("http")) {
+                                url = eleArr[0];
+                                desc = eleArr[1] === undefined ? "" : eleArr[1];
+                            }
+                            else {
+                                url = "";
+                                desc = eleArr[0];
+                            }
+                            aniSectionData += ` <p class="ani-explain">${desc}</p> <a class="ani-link" href="${url}">${url}</a>`;
+                        });
+                    });
+                document.getElementById("ani-section").innerHTML += aniSectionData;
+
+            }
+
+            async function LoadExercise(chapterName, grade) {
+                document.getElementById("exe-section").innerHTML = '<p id="exercise-section-head" >練習題</p>';
+
+                const exerciseURLList = await LoadData(COL_HASH['練習題'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
+                const exerciseList = exerciseURLList.map(url => {
+                    return ` <iframe class="exerciseform" src="${'https://docs.google.com/forms/d/e/' + url.match("e\/(.+?)\/viewform")[1] + '/viewform?embedded=true'}"></iframe>`;
+                }).join("");
+                document.getElementById("exe-section").innerHTML += exerciseList;
+
+            }
+
+            function ScrollWindow(htmlTagID) {
+                document.getElementById(htmlTagID).scrollIntoView({ block: "start", inline: "nearest", behavior: "smooth" })
+            }
+            
+            document.addEventListener("DOMContentLoaded", CreateChapterList)
 
         </script> 
     </head>
     <body>
-        <div id = "chaptertablesection">
-            <p id = "subjecthead"></p>
-            <div id = "chaptertable">
-                <div class  = "chapterlist"></div>
-                <div class  = "chapterlist"></div>
-                <div class  = "chapterlist"></div>
-            </div>
+        <div><a id="return-button" href="javascript:void(0)">∧ return to top</a></div>
+        <div id="catalog-section">
+            <p id="subject-title"></p>
+            <div id="grade-section"></div>
         </div>
-        <div id = "chaptercontentsection">
-            <div id = "contenthead">
-                <p id = "conceptlisthead">章節名稱:</p>
-                <a id = "returntopbuttom" href = "javascript:void(0)" onclick = "javascript : scroll_window('chaptertablesection') ; return false ;" >∧ return to top</a>
+        <div id="content-section">
+            <div id="content-title">
+                <p id="concept-title">章節名稱:</p>
             </div>
-            <div id = "listsection">
-                <div id = "conceptlistsection"></div>
-                <div id = "animationheadersection">
-                    <a class = "conceptlist" href = "javascript:void(0)" onclick = "javascript : scroll_window('animationsection') ; return false ;" >動畫操作</a>
-                </div>
-                <div id = "exerciseheadersection">
-                    <a class = "conceptlist" href = "javascript:void(0)" onclick = "javascript : scroll_window('exercisesection') ; return false ;" >練習題</a>
-                </div>
+            <div id="content-outline-section">
+                <div id="content-outline-of-concept"></div>
+                <div id="content-outline-of-animation"><a class="content-outline-list" href="javascript:void(0)"
+                        onclick="javascript : ScrollWindow('animation-section-head') ; return false ;">動畫操作</a></div>
+                <div id="content-outline-of-exercise"><a class="content-outline-list" href="javascript:void(0)"
+                        onclick="javascript : ScrollWindow('exercise-section-head') ; return false ;">練習題</a></div>
             </div>
-            <div id = "conceptvideosection"></div>
-            <div id = "animationsection"></div>
-            <div id = "exercisesection"></div>
+            <div id="video-section"></div>
+            <div id="ani-section"></div>
+            <div id="exe-section"></div>
         </div>
     </body>
 </html>
