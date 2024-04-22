@@ -307,7 +307,7 @@
                 }).catch(err => console.log("test Fetch ERR-", err));
                 return dupArr;
             }
-            
+
             async function CreateChapterList() {
                 async function CreateDiv(grade) {
                     const chapterList = await LoadData(COL_HASH['章節名稱'], grade);
@@ -327,36 +327,33 @@
 
             }
 
+            async function CreateChapterContent(chapterName, grade, click = false) {
+                document.getElementById("content-section").style.display = "block";
+                document.getElementById("concept-title").innerText = "章節名稱：" + chapterName;
+
+                //buildConceptSection
+                const conceptList = await LoadData(COL_HASH['觀念名稱'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
+                const conceptLinks = conceptList.map(conceptName => {
+                    return ` <a class="content-outline-list" href="javascript:void(0)" onclick="javascript:LoadVideo('${chapterName}','${conceptName}', '${grade}');ScrollWindow('video-head');return false;">${conceptName}</a>`;
+                }).join("");
+                document.getElementById("content-outline-of-concept").innerHTML = conceptLinks;
+
+                LoadContent(chapterName, grade, conceptList[0]);
 
 
-    
-        /* concepttable for the chapter */
+            }
 
-        function conceptlist(chaptername){
-            let selection = 'F where E contains"' + chaptername + '"' + ' AND A != \"EX\"'
-            let url  = url_base + selection
-            fetch(url).then((response) => response.text()).then((data) => {
-                let rows = [];
-                let list = [];
-                let firstconcept_chapter;
-                let existconcept = new Set();
-                rows = data.split(/\r?\n|\r/).filter(function (elm){
-                    return (elm.slice(1,-1).length != 0); // elm != null && elm !== false && elm != ""
-                })
-                firstconcept_chapter = rows[0].slice(1,-1)
-                for (var i = 0; i < rows.length;i++) {
-                    let concept = rows[i].slice(1,-1)
-                    if(existconcept.has(concept)) { continue }
-                    list.push("<a class = \"conceptlist\" href =\"javascript:void(0)\" onclick=\"javascript:changeconcept('" + chaptername + "','" + concept + "');scroll_window('videohead');return false;\">"+ concept + "</a>")
-                    existconcept.add(concept)
-                }
-                document.getElementById("conceptlisthead").innerText = "章節名稱：" + chaptername
-                changeconcept(chaptername, firstconcept_chapter)
-                document.getElementById("chaptercontentsection").style.display = "block";
-                document.getElementById("conceptlistsection").innerHTML = list.join("")
-                scroll_window('conceptlisthead') //to fix the first click on chaptername when the chaptercontentsection's display is none will fail to scroll the window
-            })
-        }
+            function LoadContent(chapterName, grade, defaultContent = None) { // wait for everything
+                //buildVideoSection
+                LoadVideo(chapterName, defaultContent, grade)
+
+                //buildAnimationSection
+                LoadAnimation(chapterName, grade)
+
+                //buildExerciseSection
+                LoadExercise(chapterName, grade)
+            }
+
 
         /* change the youtube URL to its video id# */
 
@@ -373,13 +370,6 @@
             return match[1];
         }
 
-        /* function to change the video according to selected concept */
-
-        function changeconcept(chaptername, conceptname){
-            concept_video_load(chaptername,conceptname)
-            animation_load(chaptername)
-            exercise_load(chaptername)
-        }
 
         function concept_video_load(chaptername, conceptname){
             let selection = 'I where E contains "'+chaptername+'" AND F contains "' + conceptname + '"' + ' AND A != \"EX\"'
