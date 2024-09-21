@@ -353,13 +353,14 @@
                 document.getElementById("concept-title").innerText = "章節名稱：" + chapterName;
 
                 //buildConceptSection
-                const conceptList = await LoadData(COL_HASH['觀念名稱'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
+                let conceptList = await LoadData(COL_HASH['觀念名稱'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
+                const firstConcept = (conceptList.length==0)? "": conceptList[0];
                 const conceptLinks = conceptList.map(conceptName => {
                     return ` <a class="content-outline-list" href="javascript:void(0)" onclick="javascript:LoadVideo('${chapterName}','${conceptName}', '${grade}');ScrollWindow('video-head');return false;">${conceptName}</a>`;
                 }).join("");
+                
                 document.getElementById("content-outline-of-concept").innerHTML = conceptLinks;
-
-                LoadContent(chapterName, grade, conceptList[0]);
+                LoadContent(chapterName, grade, firstConcept);
 
 
             }
@@ -434,7 +435,7 @@
                 var catalogRange = document.getElementById("catalog-section").getBoundingClientRect().top
                 // content = 0: content title, content < -10: content section
                 var contentRange = document.getElementById("content-section").getBoundingClientRect().top
-                console.log(`catalogRange:${catalogRange}, contentRange:${contentRange}`)
+                // console.log(`catalogRange:${catalogRange}, contentRange:${contentRange}`)
                  if (contentRange < -10){ // slightly movement
                     returnButtonSelector.classList.add("scrolling");
                     returnButtonSelector.innerText = "^ return to chapter"
