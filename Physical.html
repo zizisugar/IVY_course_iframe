@@ -34,10 +34,10 @@
                 flex-wrap: nowrap;
                 align-self: center;
                 justify-content: space-between;
-                width: 79.32vw;
+                /* width: 79.32vw; */
                 min-height: 50vw;
-                margin-left: 10.34vw;
-                margin-right: 10.34vw;
+                margin-left: 7.5%;
+                margin-right: 7.5%;
                 margin-bottom: 6.25vw;
             }
 
@@ -45,7 +45,7 @@
                 text-align: center;
                 display: flex;
                 flex-direction: column;
-                width: 20.55vw;
+                width: 30%;
                 align-items: center;
                 margin-top: 1.1vw;
                 margin-bottom: 2.36vw;
@@ -53,7 +53,7 @@
 
             .chapter-list p {
                 line-height: 4.861vw;
-                width: 11.39vw;
+                /* width: 11.39vw; */
                 height: 4.861vw;
                 font-size: 2.5vw;
                 font-weight: 900;
@@ -62,9 +62,11 @@
             }
 
             .chapter-list a {
-                width: 11.39vw;
-                height: 4.027vw;
+                width: 100%;
+                /* height: 4.027vw; */
                 line-height: 4.027vw;
+                word-break: break-all; 
+                /* text-align: left;  */
                 font-size: 2.22vw;
                 font-style: normal;
                 font-weight: 900;
@@ -101,7 +103,7 @@
                 font-size: 2.5vw;
                 font-weight: 600;
                 text-align: left;
-                width: 33.06vw;
+                /* width: 33.06vw; */
                 height: 7.09vw;
                 line-height: 7.09vw;
                 margin-left: 6.67vw;
@@ -285,7 +287,8 @@
                     '物理': '0',
                     '化學': '1931802034',
                     '數學': '663005280',
-                    '地球科學': '2068702923'
+                    '地球科學': '2068702923',
+                    '生物': '545766521'
                 },
                 '國中': {
                     '理化': '315328052'
@@ -352,13 +355,14 @@
                 document.getElementById("concept-title").innerText = "章節名稱：" + chapterName;
 
                 //buildConceptSection
-                const conceptList = await LoadData(COL_HASH['觀念名稱'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
+                let conceptList = await LoadData(COL_HASH['觀念名稱'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
+                const firstConcept = (conceptList.length==0)? "": conceptList[0];
                 const conceptLinks = conceptList.map(conceptName => {
                     return ` <a class="content-outline-list" href="javascript:void(0)" onclick="javascript:LoadVideo('${chapterName}','${conceptName}', '${grade}');ScrollWindow('video-head');return false;">${conceptName}</a>`;
                 }).join("");
+                
                 document.getElementById("content-outline-of-concept").innerHTML = conceptLinks;
-
-                LoadContent(chapterName, grade, conceptList[0]);
+                LoadContent(chapterName, grade, firstConcept);
 
 
             }
@@ -433,7 +437,7 @@
                 var catalogRange = document.getElementById("catalog-section").getBoundingClientRect().top
                 // content = 0: content title, content < -10: content section
                 var contentRange = document.getElementById("content-section").getBoundingClientRect().top
-                console.log(`catalogRange:${catalogRange}, contentRange:${contentRange}`)
+                // console.log(`catalogRange:${catalogRange}, contentRange:${contentRange}`)
                  if (contentRange < -10){ // slightly movement
                     returnButtonSelector.classList.add("scrolling");
                     returnButtonSelector.innerText = "^ return to chapter"
