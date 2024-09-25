@@ -2,9 +2,32 @@
 <html>
     <head>
         <style>
+            :root {
+                /* color */
+                --main-bg-color: #313131; /* white #313131; */
+                --main-font-color: #e3e2d6; /* black #e3e2d6; */
+                --assign-color: #00A490;
+                --section-third: rgb(0, 164, 144, 0.13) ; 
+                --section-second: rgb(0, 173, 152, 0.4);
+                --section-one: rgb(0, 137, 121, 0.4);
+
+                /* font */
+                --main-font-family: 'Zen Antique Soft';
+                --second-font-family: 'Zen Antique';
+                --subject-fz: 2.77vw;
+                --title-fz: 2.5vw; 
+                --list-title-fz: 2.08vw;
+                --content-title-fz: 1.6vw;
+                --content-detail-fz: 1.45vw;
+                --pointer-fz: 1.11vw;
+            }
+            
+
             body {
                 margin: 0;
-                font-family: 'Zen Antique Soft';
+                font-family: var(--main-font-family);
+                background-color: var(--main-bg-color); 
+                color: var(--main-font-color);
             }
 
             /* font-size
@@ -15,7 +38,7 @@
             */
 
             #subject-title {
-                font-size: 2.77vw;
+                font-size: var(--subject-fz); 
                 font-weight: 900;
                 width: 21.74vw;
                 height: 6.46vw;
@@ -55,8 +78,8 @@
                 line-height: 4.861vw;
                 /* width: 11.39vw; */
                 height: 4.861vw;
-                font-size: 2.5vw;
-                font-weight: 900;
+                font-size: var(--title-fz);
+                font-weight: 500;
                 margin-top: 0.1vw;
                 margin-bottom: 0.868vw;
             }
@@ -66,10 +89,10 @@
                 /* height: 4.027vw; */
                 line-height: 4.027vw;
                 word-break: break-all; 
-                /* text-align: left;  */
-                font-size: 2.22vw;
+                text-align: left; 
+                font-size: var(--list-title-fz); /*2.22*/ 
                 font-style: normal;
-                font-weight: 900;
+                font-weight: 400;
                 margin: 0.59vw;
                 margin-bottom: 0.59vw;
                 margin-left: 0;
@@ -77,18 +100,18 @@
             }
 
             #content-section {
-                font-family: 'Zen Antique';
+                font-family: var(--second-font-family);
                 width: 100%;
                 display: none;
             }
 
             a {
                 text-decoration: none;
-                color: black;
+                color: var(--main-font-color); 
             }
 
             a:hover {
-                color: #00A490;
+                color: var(--assign-color);
             }
 
             #content-title {
@@ -100,7 +123,7 @@
 
             #concept-title {
                 display: block;
-                font-size: 2.5vw;
+                font-size: var(--title-fz); 
                 font-weight: 600;
                 text-align: left;
                 /* width: 33.06vw; */
@@ -113,7 +136,7 @@
 
             #return-button {
                 display: none;
-                font-size: 1.11vw;
+                font-size: var(--pointer-fz); 
                 color: #6f6f6f;
                 margin-top: 2%;
                 margin-left: 80%;
@@ -121,7 +144,7 @@
             }
 
             #return-button:hover {
-                color: #00A490;
+                color: var(--assign-color);
             }
 
             #return-button.scrolling {
@@ -131,7 +154,7 @@
 
             #content-outline-of-concept {
                 width: 100%;
-                background-color: rgb(0, 164, 144, 0.13);
+                background-color: var(--section-third);
                 padding-top: 1vw;
                 padding-bottom: 1vw;
             }
@@ -144,7 +167,7 @@
             .content-outline-list {
                 margin: 0%;
                 font-weight: 400;
-                font-size: 1.6vw;
+                font-size: var(--content-title-fz); 
                 padding-top: 1vw;
                 padding-bottom: 1vw;
                 margin-left: 8.62vw;
@@ -153,7 +176,7 @@
             }
 
             #video-head {
-                font-size: 2.5vw;
+                font-size: var(--title-fz);
                 font-weight: 900;
                 margin-top: 1vw;
                 margin-bottom: 1vw;
@@ -165,12 +188,12 @@
 
             #content-outline-of-animation {
                 width: 100%;
-                background-color: rgb(0, 173, 152, 0.4);
+                background-color:var(--section-second); 
             }
 
             #content-outline-of-exercise {
                 width: 100%;
-                background-color: rgb(0, 137, 121, 0.4);
+                background-color: var(--section-one);
             }
 
             #content-outline-section {
@@ -229,14 +252,14 @@
             }
 
             #animation-section-head {
-                font-size: 2.5vw;
+                font-size: var(--title-fz);
                 font-weight: 900;
                 margin-top: 1vw;
                 margin-bottom: 1vw;
             }
 
             #exercise-section-head {
-                font-size: 2.5vw;
+                font-size: var(--title-fz);
                 font-weight: 900;
                 margin-top: 0;
                 margin-bottom: 1vw;
@@ -246,26 +269,26 @@
             .ani-explain {
                 width: 60vw;
                 text-align: left;
-                font-size: 1.45vw;
+                font-size: var(--content-detail-fz); 
                 font-weight: 900;
                 margin: 0;
             }
 
             .ani-link-head {
-                color: #00A490;
+                color: var(--assign-color);
                 width: 60vw;
                 text-align: left;
                 margin: 0;
-                font-size: 1.45vw;
+                font-size: var(--content-detail-fz);
                 font-weight: 900;
             }
 
             .ani-link {
-                color: #00A490;
+                color: var(--assign-color);
                 width: 60vw;
                 text-align: center;
                 border: 0.3vw solid;
-                font-size: 1.45vw;
+                font-size: var(--content-detail-fz);
                 font-weight: 900;
                 display: inline-block;
                 word-wrap: break-word;
