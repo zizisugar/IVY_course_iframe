@@ -178,15 +178,24 @@
             }
 
             #video-section {
-                display: flex;
-                flex-direction: column;
+                /* display: flex;
+                flex-direction: column; */
                 align-items: center;
                 text-align: center;
                 /* min-height: 80vh; */
             }
 
             .conceptvideo {
-                width: 66.875vw;
+                width: 59%;
+                float:left;
+                height: 39.79vw;
+                margin-top: 3vw;
+                margin-bottom: 7.57vw; /*7.57vw;*/
+            }
+            .conceptvideopdf {
+                width: 39%;
+                float:right;
+
                 height: 39.79vw;
                 margin-top: 3vw;
                 margin-bottom: 7.57vw;
@@ -268,7 +277,7 @@
         <script type = "text/javascript">
             const SHEET_ID = '1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM';
             const EDUCATION = '高中';
-            const SUBJECT = '物理';
+            const SUBJECT = '測試';
 
             const COL_HASH = {
                 'example': 'A',
@@ -278,9 +287,10 @@
                 '章節名稱': 'E',
                 '觀念名稱': 'F',
                 '觀念影片': 'G',
-                '概念動畫': 'H',
-                '動畫解釋': 'I',
-                '練習題': 'J'
+                '影片筆記': 'H',
+                '概念動畫': 'I',
+                '動畫解釋': 'J',
+                '練習題': 'K'
             };
             const GID_HASH = {
                 '高中': {
@@ -288,7 +298,8 @@
                     '化學': '1931802034',
                     '數學': '663005280',
                     '地球科學': '2068702923',
-                    '生物': '545766521'
+                    '生物': '545766521',
+                    '測試': '1287470721'
                 },
                 '國中': {
                     '理化': '315328052'
@@ -381,13 +392,17 @@
             async function LoadVideo(chapterName, conceptName, grade) {
                 document.getElementById("video-section").innerHTML = '<p id = "video-head" >觀念影片 : ' + conceptName + '</p>';
 
-                const videoURLList = await LoadData(COL_HASH['觀念影片'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}" AND ${COL_HASH['觀念名稱']} = "${conceptName}"`);
-
-                const videoEmbedList = videoURLList.map(url => {
-                    return ` <iframe class="conceptvideo"  src="https://www.youtube.com/embed/${url.match('(?:youtu.be/)(.{11})')[1]}"></iframe>`;
-                }).join("");
-                document.getElementById("video-section").innerHTML += videoEmbedList;
-
+                let videoSectionData = "";
+                await LoadData([COL_HASH['觀念影片'], COL_HASH['影片筆記']].join(','), grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}" AND ${COL_HASH['觀念名稱']} = "${conceptName}"`).then(
+                    (listArr) => {
+                        listArr.forEach((eleArr) => {
+                            url = eleArr[0].match('(?:youtu.be/)(.{11})')[1]
+                            note = eleArr[1] === undefined ? "1mpyh78uTWz2tUtKAYMpomYLaKLb-BonsWf44XhF9M4U" : eleArr[1].match('(?:document\/d\/)(.+)(?:\/)')[1]
+                            videoSectionData += ` <iframe class="conceptvideo"  src="https://www.youtube.com/embed/${url}"></iframe>`
+                            videoSectionData += ` <iframe class="conceptvideopdf" src="https://drive.google.com/file/d/${note}/preview" frameborder=0; margin=0;width=100%;>筆記載入中…</iframe>`
+                        });
+                    });
+                document.getElementById("video-section").innerHTML += videoSectionData;
             }
 
             async function LoadAnimation(chapterName, grade) {
