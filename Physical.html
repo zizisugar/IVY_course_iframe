@@ -58,150 +58,159 @@ a:hover {
     display: flex;
 }
 
+@media only screen and (min-width: 768px) {
 
-            #content-outline-of-concept {
-                width: 100%;
-                background-color: var(--section-third);
-                padding-top: 1vw;
-                padding-bottom: 1vw;
-            }
+    #catalog-section {
+        /* padding: var(--catalog-list-padding-sp); */
+    }
 
-            #content-outline-of-concept a {
-                padding-top: 0;
-                padding-bottom: 0;
-            }
+    #subject-title {
+        font-size: var(--subject-fz); 
+        font-weight: var(--main-title-fw);
+        margin-left: var(--title-left-shift-sp);
+        text-align: left;
+    }
 
-            .content-outline-list {
-                margin: 0%;
-                font-weight: 400;
-                font-size: var(--content-title-fz); 
-                padding-top: 1vw;
-                padding-bottom: 1vw;
-                margin-left: 8.62vw;
-                text-align: left;
-                display: block;
-            }
+    #grade-section { /* cancel if mobile */
+        display: flex;
+        justify-content: space-between; 
+        margin-bottom: var(--section-bottom-sp);
+    }
 
-            #video-head {
-                font-size: var(--title-fz);
-                font-weight: 900;
-                margin-top: 1vw;
-                margin-bottom: 1vw;
-                /* width: 60vw; */
-                height: 7.08vw;
-                padding-top: 3vw;
-                text-wrap: pretty;
-            }
+    .grade-title {
+        text-align: center;
+        font-size: var(--title-fz);
+        font-weight: var(--sub-title-fw);
+    }   
 
-            #content-outline-of-animation {
-                width: 100%;
-                background-color:var(--section-second); 
-            }
+    .chapter-list {/* cancel if mobile */
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+    }
 
-            #content-outline-of-exercise {
-                width: 100%;
-                background-color: var(--section-one);
-            }
 
-            #content-outline-section {
-                margin-bottom: 7.64vw;
-            }
+    .chapter-list a{
+        text-align: center; 
+        padding: var(--catalog-list-padding-sp);
+        /* line-break: normal; */
+        font-size: var(--list-fz);
+        font-weight: var(--list-title-fw);
+    }
 
-            #video-section {
-                /* display: flex;
-                flex-direction: column; */
-                align-items: center;
-                text-align: center;
-                /* min-height: 80vh; */
-            }
+    #content-section { 
+        display: none; 
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: var(--section-bottom-sp);
+    }
 
-            .conceptvideo {
-                width: 59%;
-                float:left;
-                height: 39.79vw;
-                margin-top: 3vw;
-                margin-bottom: 7.57vw; /*7.57vw;*/
-            }
-            .conceptvideopdf {
-                width: 39%;
-                float:right;
+    #content-main-title {
+        font-size: var(--title-fz); 
+        font-weight: var(--sub-title-fw);
+        text-align: left;
+        margin-left: var(--title-left-shift-sp);
+    }
 
-                height: 39.79vw;
-                margin-top: 3vw;
-                margin-bottom: 7.57vw;
-            }
+    .content-sub-title {
+        font-size: var(--title-fz);
+        font-weight: var(--main-title-fw);
+        text-align: center;
+        text-wrap: pretty;
+        margin-top: var(--title-top-sp);
+    }
 
-            .exerciseform {
-                width: 100%;
-                height: 80vh;
-                border: 0;
-                /* margin-top: 5vw; */
-                margin-bottom: 5vw;
-            }
+    #content-outline-section a {
+        font-weight: var(--list-title-fw);
+        font-size: var(--catalog-list-fz);
+        padding: calc(var(--content-list-padding-sp)*0.4);
+        margin-left: calc(var(--title-left-shift-sp)*1.45);
+        text-align: left;
+        display: block;
+    }
 
-            #ani-section {
-                display: flex;
-                width: 100vw;
-                flex-direction: column;
-                text-align: center;
-                align-items: center;
-                margin-bottom: 8vw;
-            }
+    #content-outline-of-video {
+        background-color: var(--section-order-first-color);
+    }
 
-            #exe-section {
-                display: flex;
-                width: 100vw;
-                flex-direction: column;
-                text-align: center;
-                align-items: center;
-                min-height: 100vh;
-                margin-bottom: 8vw;
-            }
+    #content-outline-of-animation {
+        background-color:var(--section-order-second-color); 
+        padding-top: var(--content-list-padding-sp);
+        padding-bottom: var(--content-list-padding-sp);
+    }
 
-            #animation-section-head {
-                font-size: var(--title-fz);
-                font-weight: 900;
-                margin-top: 1vw;
-                margin-bottom: 1vw;
-            }
+    #content-outline-of-exercise {
+        background-color: var(--section-order-third-color);
+        padding-top: var(--content-list-padding-sp);
+        padding-bottom: var(--content-list-padding-sp);
+    }
 
-            #exercise-section-head {
-                font-size: var(--title-fz);
-                font-weight: 900;
-                margin-top: 0;
-                margin-bottom: 1vw;
-                text-align: center;
-            }
+    .iframe-pair {
+        margin-top: calc(var(--title-top-sp)*0.7);
+        display: flex;
+        align-items: center;
 
-            .ani-explain {
-                width: 60vw;
-                text-align: left;
-                font-size: var(--content-detail-fz); 
-                font-weight: 900;
-                margin: 0;
-            }
+    }
 
-            .ani-link-head {
-                color: var(--assign-color);
-                width: 60vw;
-                text-align: left;
-                margin: 0;
-                font-size: var(--content-detail-fz);
-                font-weight: 900;
-            }
+    .iframe-video {
+        width: 60%;
+        float:left;
+        height: var(--iframe-height-sp);
+    }
 
-            .ani-link {
-                color: var(--assign-color);
-                width: 60vw;
-                text-align: center;
-                border: 0.3vw solid;
-                font-size: var(--content-detail-fz);
-                font-weight: 900;
-                display: inline-block;
-                word-wrap: break-word;
-                padding: 1vw;
-                margin-bottom: 5vw;
-            }
+    .iframe-pdf {
+        width: 39%;
+        float:right;
+        height: var(--iframe-height-sp);
+    }
+
+    #ani-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ani-pair {
+        width: 60%;
+        font-size: var(--content-detail-fz); 
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        margin: 1vw;
+    }
+
+    .ani-explain {
+        text-align: left;
+        margin: 0;
+        padding-bottom: 1vw;
+    }
+
+    .ani-link {
+        color: var(--assign-color);
+        text-align: center;
+        border: 0.3vw solid;
+        font-size: calc(var(--content-detail-fz)*0.7);
+        padding: 1vw;
+        display: inline-block;
+        word-wrap: break-word;
+    }
+
+    .exercise-form {
+        width: 100%;
+        height: 80vh;
+        border: 0;
+    }
+
+    #return-button {
+        display: none;
+        font-size: var(--pointer-fz); 
+        color: #0ee3c3;
+        margin-top: 1%;
+        margin-left: 80%;
+        position: fixed;
+    }
+}
 
         </style>
         <script type = "text/javascript">
