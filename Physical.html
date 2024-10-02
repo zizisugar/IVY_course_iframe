@@ -111,7 +111,6 @@ a:hover {
 
     #content-section { 
         display: none; 
-        display: flex;
         flex-direction: column;
         text-align: center;
         margin-bottom: var(--section-bottom-sp);
@@ -262,7 +261,6 @@ a:hover {
 
     #content-section { 
         display: none; 
-        display: flex;
         flex-direction: column;
         text-align: center;
         margin-bottom: var(--section-bottom-sp);
@@ -423,7 +421,7 @@ a:hover {
 
                 // need try catch error handling (Resolve, reject)
                 const dupArr = await fetch(url).then((response) => response.text()).then(arr => {
-                    const cleanArr = arr.split('"').filter(n => n.match(`.`) && !n.match('\,')); // remove ',', ' ', '"'
+                    const cleanArr = arr.split('"').filter(n => n.match(`.`) && !n.match('\,')); 
 
                     // group by
                     const colNum = (targetData.split(',')).length;
