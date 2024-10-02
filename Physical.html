@@ -11,6 +11,9 @@
       
         <style>
 :root {
+    /* == small device: smd == */
+    --smd-size-ratio: 2;
+
     /* color */
     --main-bg-color: #313131; /* white #313131; */
     --main-font-color: #e3e2d6; /* black #e3e2d6; */
@@ -452,7 +455,7 @@ a:hover {
                     const chapterLinks = chapterList.map(chapter => {
                         return ` <a href="javascript:void(0)" onclick="javascript:CreateChapterContent('${chapter}','${grade}');ScrollWindow('content-main-title');return false;">${chapter}</a>`;
                     }).join("");
-                    const chapterLinkList = ` <p>${EDUCATION[0]}${grade}</p>${chapterLinks}`;
+                    const chapterLinkList = ` <p class="grade-title">${EDUCATION[0]}${grade}</p>${chapterLinks}`;
                     return `<div class="chapter-list" id="${grade}">` + chapterLinkList + '</div>';
                 }
 
@@ -479,6 +482,9 @@ a:hover {
                 }).join("");
                 
                 document.getElementById("content-outline-of-video").innerHTML = conceptLinks;
+                document.getElementById("content-outline-of-video").style.paddingTop = '1vw';
+                document.getElementById("content-outline-of-video").style.paddingBottom = '1vw';
+
                 LoadContent(chapterName, grade, firstConcept);
 
 
