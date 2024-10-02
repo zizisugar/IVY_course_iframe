@@ -541,8 +541,8 @@ a:hover {
             
             document.addEventListener("DOMContentLoaded", CreateChapterList)
 
-            window.addEventListener('scroll',CheckPosition,false);
-            function CheckPosition()
+            window.addEventListener('scroll',CheckHorizontalPosition,false);
+            function CheckHorizontalPosition()
             {
                 var returnButtonSelector = document.querySelector("#return-button"); 
                 var catalogRange = document.getElementById("catalog-section").getBoundingClientRect().top
@@ -550,16 +550,16 @@ a:hover {
                 // console.log(`catalogRange:${catalogRange}, contentRange:${contentRange}`)
                  if (contentRange < -10){ // slightly movement
                     returnButtonSelector.classList.add("scrolling");
-                    returnButtonSelector.innerText = "^ return to chapter"
+                    returnButtonSelector.innerText = "↑選擇觀念" //"^ return to chapter"
                     returnButtonSelector.onclick = function(){
-                        ScrollWindow('concept-title')
+                        ScrollWindow('content-main-title')
                         return false;
                     }
                 }
                 // second else-if for get "return to chapter" first
                 else if (catalogRange < -100) { // some space without button while being in catalog section
                     returnButtonSelector.classList.add("scrolling");
-                    returnButtonSelector.innerText = "^ return to top"
+                    returnButtonSelector.innerText = "↑選擇章節" //"^ return to top"
                     returnButtonSelector.onclick = function(){
                         ScrollWindow('catalog-section')
                         return false;
