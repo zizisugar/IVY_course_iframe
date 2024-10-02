@@ -371,7 +371,7 @@
 
                     // buildChapterLink
                     const chapterLinks = chapterList.map(chapter => {
-                        return ` <a href="javascript:void(0)" onclick="javascript:CreateChapterContent('${chapter}','${grade}',true);ScrollWindow('concept-title');return false;">${chapter}</a>`;
+                        return ` <a href="javascript:void(0)" onclick="javascript:CreateChapterContent('${chapter}','${grade}');ScrollWindow('content-main-title');return false;">${chapter}</a>`;
                     }).join("");
                     const chapterLinkList = ` <p>${EDUCATION[0]}${grade}</p>${chapterLinks}`;
                     return `<div class="chapter-list" id="${grade}">` + chapterLinkList + '</div>';
@@ -384,9 +384,9 @@
 
             }
 
-            async function CreateChapterContent(chapterName, grade, click = false) {
+            async function CreateChapterContent(chapterName, grade) {
                 document.getElementById("content-section").style.display = "block";
-                document.getElementById("concept-title").innerText = "章節名稱：" + chapterName;
+                document.getElementById("content-main-title").innerText = "章節名稱：" + chapterName;
 
                 //buildConceptSection
                 let conceptList = await LoadData(COL_HASH['觀念名稱'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
@@ -395,7 +395,7 @@
                     return ` <a class="content-outline-list" href="javascript:void(0)" onclick="javascript:LoadVideo('${chapterName}','${conceptName}', '${grade}');ScrollWindow('video-head');return false;">${conceptName}</a>`;
                 }).join("");
                 
-                document.getElementById("content-outline-of-concept").innerHTML = conceptLinks;
+                document.getElementById("content-outline-of-video").innerHTML = conceptLinks;
                 LoadContent(chapterName, grade, firstConcept);
 
 
@@ -413,7 +413,7 @@
             }
 
             async function LoadVideo(chapterName, conceptName, grade) {
-                document.getElementById("video-section").innerHTML = '<p id = "video-head" >觀念影片 : ' + conceptName + '</p>';
+                document.getElementById("video-section").innerHTML = '<p id = "video-title" class="content-sub-title" >觀念影片 : ' + conceptName + '</p>';
 
                 let videoSectionData = "";
                 await LoadData([COL_HASH['觀念影片'], COL_HASH['影片筆記']].join(','), grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}" AND ${COL_HASH['觀念名稱']} = "${conceptName}"`).then(
@@ -429,7 +429,7 @@
             }
 
             async function LoadAnimation(chapterName, grade) {
-                document.getElementById("ani-section").innerHTML = '<p id = "animation-section-head">動畫操作</p>';
+                document.getElementById("ani-section").innerHTML = '<p id="ani-title" class="content-sub-title">動畫操作</p>';
                 let aniSectionData = "";
                 await LoadData([COL_HASH['概念動畫'], COL_HASH['動畫解釋']].join(','), grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`).then(
                     (listArr) => {
@@ -451,11 +451,11 @@
             }
 
             async function LoadExercise(chapterName, grade) {
-                document.getElementById("exe-section").innerHTML = '<p id="exercise-section-head" >練習題</p>';
+                document.getElementById("exe-section").innerHTML = '<p id="exe-title" class="content-sub-title">練習題</p>';
 
                 const exerciseURLList = await LoadData(COL_HASH['練習題'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
                 const exerciseList = exerciseURLList.map(url => {
-                    return ` <iframe class="exerciseform" src="${'https://docs.google.com/forms/d/e/' + url.match("e\/(.+?)\/viewform")[1] + '/viewform?embedded=true'}"></iframe>`;
+                    return ` <iframe class="exercise-form" src="${'https://docs.google.com/forms/d/e/' + url.match("e\/(.+?)\/viewform")[1] + '/viewform?embedded=true'}"></iframe>`;
                 }).join("");
                 document.getElementById("exe-section").innerHTML += exerciseList;
 
@@ -506,15 +506,13 @@
             <div id="grade-section"></div>
         </div>
         <div id="content-section">
-            <div id="content-title">
-                <p id="concept-title">章節名稱:</p>
-            </div>
+            <p id="content-main-title">章節名稱:</p>
             <div id="content-outline-section">
-                <div id="content-outline-of-concept"></div>
+                <div id="content-outline-of-video"></div>
                 <div id="content-outline-of-animation"><a class="content-outline-list" href="javascript:void(0)"
-                        onclick="javascript : ScrollWindow('animation-section-head') ; return false ;">動畫操作</a></div>
+                        onclick="javascript : ScrollWindow('ani-title') ; return false ;">動畫操作</a></div>
                 <div id="content-outline-of-exercise"><a class="content-outline-list" href="javascript:void(0)"
-                        onclick="javascript : ScrollWindow('exercise-section-head') ; return false ;">練習題</a></div>
+                        onclick="javascript : ScrollWindow('exe-title') ; return false ;">練習題</a></div>
             </div>
             <div id="video-section"></div>
             <div id="ani-section"></div>
