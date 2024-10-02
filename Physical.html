@@ -212,6 +212,162 @@ a:hover {
     }
 }
 
+/* =================== small device =================== */
+@media only screen and (max-width: 768px) {
+
+    /* #catalog-section {
+        padding: var(--content-list-padding-sp);
+    } */
+
+    #subject-title {
+        font-size: calc(var(--subject-fz)*var(--smd-size-ratio)); 
+        font-weight: var(--main-title-fw);
+        margin-left: var(--title-left-shift-sp);
+        text-align: center;
+    }
+
+    #grade-section { 
+        margin-bottom: var(--section-bottom-sp); 
+        width: 80%;
+        margin-left: 10vw;
+        text-align: center;
+        align-items: center;
+    }
+
+    .grade-title {
+        text-align: center;
+        font-size: calc(var(--title-fz)*var(--smd-size-ratio)); 
+        font-weight: var(--sub-title-fw);
+    }   
+    /* .slick-list{padding:0 0 0 0 !important;} */
+    .chapter-list a{
+        padding: calc(var(--catalog-list-padding-sp)*2);;
+        text-align: center; 
+        display: flex;
+        flex-direction: column;
+        font-size: calc(var(--list-fz)*var(--smd-size-ratio)); 
+        font-weight: var(--list-title-fw);
+    }
+
+    #content-section { 
+        display: none; 
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: var(--section-bottom-sp);
+    }
+
+    #content-main-title {
+        font-size: calc(var(--title-fz)*var(--smd-size-ratio));  
+        font-weight: var(--sub-title-fw);
+        text-align: left;
+        margin-left: var(--title-left-shift-sp);
+    }
+
+    .content-sub-title {
+        font-size: calc(var(--title-fz)*var(--smd-size-ratio)); 
+        font-weight: var(--main-title-fw);
+        text-align: center;
+        text-wrap: pretty;
+        margin-top: var(--title-top-sp);
+        width: 80%;
+        display: inline-block;
+    }
+
+    #content-outline-section a {
+        width: 80%;
+        font-weight: var(--list-title-fw);
+        font-size: calc(var(--catalog-list-fz)*var(--smd-size-ratio)); 
+        padding: calc(var(--content-list-padding-sp)*0.8);
+        margin-left: calc(var(--title-left-shift-sp)*1.45);
+        text-align: left;
+        display: block;
+    }
+
+    #content-outline-of-video {
+        background-color: var(--section-order-first-color);
+    }
+
+    #content-outline-of-animation {
+        background-color:var(--section-order-second-color); 
+        padding-top: var(--content-list-padding-sp);
+        padding-bottom: var(--content-list-padding-sp);
+    }
+
+    #content-outline-of-exercise {
+        background-color: var(--section-order-third-color);
+        padding-top: var(--content-list-padding-sp);
+        padding-bottom: var(--content-list-padding-sp);
+    }
+
+    .iframe-pair {
+        margin-top: calc(var(--title-top-sp));
+        /* display: flex; */
+        align-items: center;
+
+    }
+
+    .iframe-video {
+        width: 80%;
+        /* float:left; */
+        height: calc(var(--iframe-height-sp)*1.5);
+    }
+
+    .iframe-pdf {
+        width: 80%;
+        /* float:right; */
+        height: calc(var(--iframe-height-sp)*3);
+    }
+
+    #ani-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .ani-pair {
+        width: 60%;
+        font-size: calc(var(--content-detail-fz)*var(--smd-size-ratio));  
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        margin: 1vw;
+        padding: calc(var(--content-list-padding-sp)*0.8);
+    }
+
+    .ani-explain {
+        text-align: left;
+        margin: 0;
+        padding-bottom: 1vw;
+    }
+
+    .ani-link {
+        color: var(--assign-color);
+        text-align: center;
+        border: 0.3vw solid;
+        font-size: calc(var(--content-detail-fz)*var(--smd-size-ratio)*0.7);
+        padding: 1vw;
+        display: inline-block;
+        word-wrap: break-word;
+    }
+
+    .exercise-form {
+        width: 100%;
+        height: 80vh;
+        border: 0;
+    }
+    
+    #return-button {
+        display: none;
+        font-size: calc(var(--pointer-fz)*var(--smd-size-ratio));  
+        color: #0ee3c3;
+        margin-top: 1%;
+        margin-left: 80%;
+        position: fixed;
+    }
+
+
+}
         </style>
         <script type = "text/javascript">
             const SHEET_ID = '1WMHa5jhu4CU69_f17v31z-bYZ2i8ts5LNMocIhV29qM';
@@ -245,7 +401,6 @@ a:hover {
                 }
             }
             var urlBase = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID_HASH[EDUCATION][SUBJECT]}`;
-
 
             async function LoadData(targetData, grade, plusCondition = "") {
                 //makeQuery
