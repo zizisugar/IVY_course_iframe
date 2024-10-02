@@ -463,7 +463,7 @@ a:hover {
                 let conceptList = await LoadData(COL_HASH['觀念名稱'], grade, ` AND ${COL_HASH['章節名稱']} = "${chapterName}"`);
                 const firstConcept = (conceptList.length==0)? "": conceptList[0];
                 const conceptLinks = conceptList.map(conceptName => {
-                    return ` <a class="content-outline-list" href="javascript:void(0)" onclick="javascript:LoadVideo('${chapterName}','${conceptName}', '${grade}');ScrollWindow('video-head');return false;">${conceptName}</a>`;
+                    return ` <a href="javascript:void(0)" onclick="javascript:LoadVideo('${chapterName}','${conceptName}', '${grade}');ScrollWindow('video-title');return false;">${conceptName}</a>`;
                 }).join("");
                 
                 document.getElementById("content-outline-of-video").innerHTML = conceptLinks;
@@ -492,8 +492,11 @@ a:hover {
                         listArr.forEach((eleArr) => {
                             url = eleArr[0].match('(?:youtu.be/)(.{11})')[1]
                             note = eleArr[1] === undefined ? "1mpyh78uTWz2tUtKAYMpomYLaKLb-BonsWf44XhF9M4U" : eleArr[1].match('(?:document\/d\/)(.+)(?:\/)')[1]
-                            videoSectionData += ` <iframe class="conceptvideo"  src="https://www.youtube.com/embed/${url}"></iframe>`
-                            videoSectionData += ` <iframe class="conceptvideopdf" src="https://drive.google.com/file/d/${note}/preview" frameborder=0; margin=0;width=100%;>筆記載入中…</iframe>`
+                            videoSectionData += 
+                                '<div class="iframe-pair">' 
+                                + ` <iframe class="iframe-video"  src="https://www.youtube.com/embed/${url}"></iframe>`
+                                + ` <iframe class="iframe-pdf" src="https://drive.google.com/file/d/${note}/preview" frameborder=0; margin=0;width=100%;>筆記載入中…</iframe>`
+                                + '</div>'
                         });
                     });
                 document.getElementById("video-section").innerHTML += videoSectionData;
@@ -514,7 +517,7 @@ a:hover {
                                 url = "";
                                 desc = eleArr[0];
                             }
-                            aniSectionData += ` <p class="ani-explain">${desc}</p> <a class="ani-link" href="${url}">${url}</a>`;
+                            aniSectionData += ` <div class="ani-pair"><p class="ani-explain">${desc}</p> <a class="ani-link" href="${url}">${url}</a></div>`;
                         });
                     });
                 document.getElementById("ani-section").innerHTML += aniSectionData;
@@ -542,9 +545,7 @@ a:hover {
             function CheckPosition()
             {
                 var returnButtonSelector = document.querySelector("#return-button"); 
-                // catalog = 0: page on the top, catalog < -100: going to content
                 var catalogRange = document.getElementById("catalog-section").getBoundingClientRect().top
-                // content = 0: content title, content < -10: content section
                 var contentRange = document.getElementById("content-section").getBoundingClientRect().top
                 // console.log(`catalogRange:${catalogRange}, contentRange:${contentRange}`)
                  if (contentRange < -10){ // slightly movement
